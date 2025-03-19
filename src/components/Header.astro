@@ -1,0 +1,25 @@
+---
+const navItems = [
+  { href: "#about", text: "Acerca de mí" },
+  { href: "#projects", text: "Projectos" },
+  { href: "#skills", text: "Habilidades" },
+  { href: "#contact", text: "Contacto" },
+];
+---
+
+<header class="fixed w-full top-0 z-50 bg-white/80 backdrop-blur-sm shadow-sm">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16">
+      <div class="flex items-center">
+        <a href="#" class="text-xl font-bold text-primary">Portfolio</a>
+      </div>
+      <div class="hidden md:flex items-center space-x-8">
+        {navItems.map(item => (
+          <a href={item.href} class="text-gray-700 hover:text-primary transition-colors">
+            {item.text}
+          </a>
+        ))}
+      </div>
+    </div>
+  </nav>
+</header>

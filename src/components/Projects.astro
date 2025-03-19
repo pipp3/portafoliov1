@@ -1,0 +1,60 @@
+---
+const projects = [
+  {
+    title: "Project 1",
+    description: "A full-stack web application built with React and Node.js",
+    image: "https://via.placeholder.com/400x300",
+    tags: ["React", "Node.js", "MongoDB"],
+    github: "https://github.com",
+    demo: "https://demo.com"
+  },
+  {
+    title: "Project 2",
+    description: "E-commerce platform with real-time updates",
+    image: "https://via.placeholder.com/400x300",
+    tags: ["Next.js", "Prisma", "PostgreSQL"],
+    github: "https://github.com",
+    demo: "https://demo.com"
+  },
+  {
+    title: "Project 3",
+    description: "Mobile-first responsive dashboard",
+    image: "https://via.placeholder.com/400x300",
+    tags: ["Vue.js", "Tailwind CSS", "Firebase"],
+    github: "https://github.com",
+    demo: "https://demo.com"
+  }
+];
+---
+
+<section id="projects" class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold text-center mb-12 text-primary">Proyectos Destacados</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {projects.map(project => (
+        <article class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform hover:-translate-y-2">
+          <img src={project.image} alt={project.title} class="w-full h-48 object-cover" />
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2">{project.title}</h3>
+            <p class="text-gray-600 mb-4">{project.description}</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              {project.tags.map(tag => (
+                <span class="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded-full">
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <div class="flex space-x-4">
+              <a href={project.github} class="text-primary hover:text-secondary" target="_blank">
+                GitHub
+              </a>
+              <a href={project.demo} class="text-primary hover:text-secondary" target="_blank">
+                Live Demo
+              </a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

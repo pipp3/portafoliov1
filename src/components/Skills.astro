@@ -1,0 +1,72 @@
+---
+const skills = {
+  "Lenguajes de programación": [
+    { name: "JavaScript", icon: "/src/assets/javascript.svg" },
+    { name: "TypeScript", icon: "/src/assets/typescript.svg" },
+    { name: "Python", icon: "/src/assets/python.svg" },
+    { name: "Go", icon: "/src/assets/go.svg" },
+  ],
+  "Frontend": [
+    { name: "React", icon: "/src/assets/react.svg" },
+    { name: "Tailwind CSS", icon: "/src/assets/tailwindcss.svg" },
+    { name: "Bootstrap", icon: "/src/assets/bootstrap.svg" },
+    { name: "Next.js", icon: "/src/assets/nextdotjs.svg" },
+    { name: "Astro", icon: "/src/assets/astro.svg" },
+  
+    
+  ],
+  "Backend": [
+    { name: "Node.js", icon: "/src/assets/nodedotjs.svg" }, 
+    { name: "Express", icon: "/src/assets/express.svg" },
+    { name: "Python", icon: "/src/assets/python.svg" },
+    { name: "Gin", icon: "/src/assets/gin.svg" }
+  ],
+  "Base de datos": [
+    { name: "PostgreSQL", icon: "/src/assets/postgresql.svg" },
+    { name: "MySQL", icon: "/src/assets/mysql.svg" },
+    { name: "MongoDB", icon: "/src/assets/mongodb.svg" }
+  ],
+  "Herramientas": [
+    { name: "Git", icon: "/src/assets/git.svg" },
+    { name: "GitHub", icon: "/src/assets/github-2.svg" },
+    { name: "Docker", icon: "/src/assets/docker.svg" },
+    
+  ],
+  "Habilidades blandas": [
+    { name: "Resolucion de problemas", icon: "" },
+    { name: "Trabajo en equipo", icon: "" },
+    { name: "Comunicacion", icon: "" },
+    { name: "Adaptacion al cambio", icon: "" },
+    { name: "Proactividad", icon: "" },
+    {name: "Priorizacion de tareas", icon: ""},
+
+  ]
+};
+---
+
+<section id="skills" class="py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold text-center mb-12 text-primary">Habilidades y Tecnologías</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {Object.entries(skills).map(([category, items]) => (
+        <div class="bg-white p-6 rounded-lg shadow-lg cursor-pointer">
+          <h3 class="text-xl font-semibold mb-4 text-textH2">{category}</h3>
+          <ul class="space-y-3">
+            {items.map(skill => (
+              <li class="flex items-center">
+                {skill.icon ? (
+                  <img src={skill.icon} alt={skill.name} class="w-6 h-6 mr-3" />
+                ) : (
+                  <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                )}
+                <span class="text-textSpan">{skill.name}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
