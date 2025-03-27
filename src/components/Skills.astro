@@ -1,4 +1,5 @@
 ---
+import { m } from "framer-motion";
 const skills = {
   "Lenguajes de programación": [
     { name: "JavaScript", icon: "/svg/javascript.svg" },
@@ -48,12 +49,12 @@ const skills = {
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl font-bold text-center mb-12 text-primary">Habilidades y Tecnologías</h2>
     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-      {Object.entries(skills).map(([category, items]) => (
-        <div class="bg-white p-6 rounded-lg shadow-lg cursor-pointer">
+      {Object.entries(skills).map(([category, items], index) => (
+        <div class="skill-card bg-white p-6 rounded-lg shadow-lg cursor-pointer opacity-0 translate-y-4 transition-all duration-500 hover:scale-105" data-index={index}>
           <h3 class="text-xl font-semibold mb-4 text-textH2">{category}</h3>
           <ul class="space-y-3">
-            {items.map(skill => (
-              <li class="flex items-center">
+            {items.map((skill, skillIndex) => (
+              <li class="skill-item flex items-center opacity-0 -translate-x-4 transition-all duration-300" data-index={skillIndex}>
                 {skill.icon ? (
                   <img src={skill.icon} alt={skill.name} class="w-6 h-6 mr-3" />
                 ) : (
@@ -70,3 +71,33 @@ const skills = {
     </div>
   </div>
 </section>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const card = entry.target as HTMLElement;
+        const cardIndex = parseInt(card.dataset.index || '0');
+        
+        // Animar la tarjeta
+        setTimeout(() => {
+          card.classList.remove('opacity-0', 'translate-y-4');
+        }, cardIndex * 100);
+
+        // Animar los items dentro de la tarjeta
+        const items = card.querySelectorAll('.skill-item');
+        items.forEach((item, itemIndex) => {
+          setTimeout(() => {
+            item.classList.remove('opacity-0', '-translate-x-4');
+          }, cardIndex * 100 + itemIndex * 50);
+        });
+      }
+    });
+  }, {
+    threshold: 0.1
+  });
+
+  document.querySelectorAll('.skill-card').forEach(card => {
+    observer.observe(card);
+  });
+</script>

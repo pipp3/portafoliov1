@@ -38,7 +38,7 @@ const socialLinks = [
           ))}
         </div>
       </div>
-      <form class="space-y-6">
+      <form id="contact-form" class="space-y-6">
         <div>
           <label for="name" class="block text-sm font-medium text-gray-700">Nombre</label>
           <input
@@ -79,3 +79,68 @@ const socialLinks = [
     </div>
   </div>
 </section>
+
+<script>
+  import emailjs from '@emailjs/browser';
+  import Swal from 'sweetalert2';
+
+  // Inicializar EmailJS con tu Public Key
+  emailjs.init(import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY);
+
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const submitButton = form?.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+  if (form && submitButton) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const originalText = submitButton.textContent;
+      submitButton.textContent = 'Enviando...';
+      submitButton.disabled = true;
+
+      // Mostrar alerta de carga
+      Swal.fire({
+        title: 'Enviando mensaje...',
+        text: 'Por favor, espera un momento',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        didOpen: () => {
+          Swal.showLoading();
+        }
+      });
+
+      emailjs.sendForm(
+        import.meta.env.PUBLIC_EMAILJS_SERVICE_ID,
+        import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID,
+        form,
+        import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY
+      )
+      .then(function() {
+        // Mostrar alerta de éxito
+        Swal.fire({
+          icon: 'success',
+          title: '¡Mensaje enviado!',
+          text: 'Gracias por contactarme. Me pondré en contacto contigo pronto.',
+          confirmButtonColor: '#4F46E5',
+          confirmButtonText: 'Aceptar'
+        });
+        form.reset();
+      }, function(error) {
+        // Mostrar alerta de error
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'No se pudo enviar el mensaje. Por favor, intenta nuevamente.',
+          confirmButtonColor: '#4F46E5',
+          confirmButtonText: 'Aceptar'
+        });
+        console.error('Error:', error);
+      })
+      .finally(function() {
+        submitButton.textContent = originalText;
+        submitButton.disabled = false;
+      });
+    });
+  }
+</script>

@@ -26,13 +26,13 @@ export default function Hero() {
               href="#contact"
               className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-secondary transition-colors"
             >
-              Contact Me
+              Contáctame
             </a>
             <a
               href="#projects"
               className="border-2 border-primary text-primary px-6 py-3 rounded-lg hover:bg-primary hover:text-white transition-colors"
             >
-              View Projects
+              Ver Proyectos
             </a>
           </div>
         </motion.div>

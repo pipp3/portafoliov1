@@ -1,5 +1,8 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "include": [".astro/types.d.ts", "src/**/*.{ts,tsx,astro}"],
-  "exclude": ["dist"]
+  "include": ["src/**/*", "env.d.ts"],
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "types": ["node"]
+  }
 }
