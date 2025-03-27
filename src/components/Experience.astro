@@ -1,0 +1,83 @@
+---
+interface Experience {
+  company: string;
+  position: string;
+  period: string;
+  description: string;
+  technologies: string[];
+  location: string;
+}
+
+const experiences: Experience[] = [
+  {
+    company: "Precision",
+    position: "Desarrollador Full Stack",
+    period: "Diciembre 2023 - Febrero 2024",
+    description: "Diseñé e implementé un sistema automatizado de cotizaciones en HubSpot CRM, reduciendo el tiempo de cotización en un 75% y mejorando la eficiencia del equipo de ventas. Usé Google Apps Script para el backend, integrando BigQuery y una API REST conectada a SQL Server. Para el frontend, utilicé HTML5, CSS3, jQuery, Bootstrap 5 y otras librerías. También documenté el sistema para facilitar futuras mejoras.",
+    technologies: ["JavaScript", "Bootstrap", "jQuery", "API REST","HTML5","CSS3","BigQuery","SQL Server"],
+    location: "Santiago, Chile"
+  },
+  
+];
+---
+
+<section id="experience" class="py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-4xl font-bold text-center mb-4 text-primary tracking-tight">Experiencia Laboral</h2>
+    <p class="text-xl text-gray-600 text-center mb-12 leading-relaxed">Mi trayectoria profesional y roles desempeñados</p>
+    
+    <div class="space-y-8">
+      {experiences.map((exp, index) => (
+        <div class="relative">
+          {/* Línea vertical */}
+          <div class="absolute left-4 md:left-1/2 h-full w-0.5 bg-primary/20"></div>
+          
+          {/* Contenido de la experiencia */}
+          <div class={`relative flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-8 ${
+            index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+          }`}>
+            {/* Círculo decorativo */}
+            <div class="absolute left-0 md:left-1/2 w-8 h-8 bg-primary rounded-full -translate-x-1/2 border-4 border-white shadow-lg"></div>
+            
+            {/* Contenido principal */}
+            <div class={`w-full md:w-1/2 p-6 bg-white rounded-lg shadow-lg ${
+              index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'
+            }`}>
+              <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 mb-4">
+                <h3 class="text-xl font-semibold text-primary tracking-tight">{exp.position}</h3>
+                <span class="text-sm text-gray-500">{exp.period}</span>
+              </div>
+              
+              <h4 class="text-lg font-medium text-textH2 mb-2">{exp.company}</h4>
+              <p class="text-gray-600 mb-4 leading-relaxed">{exp.description}</p>
+              
+              <div class="flex flex-wrap gap-2 mb-4">
+                {exp.technologies.map((tech) => (
+                  <span class="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded-full">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+              
+              <div class="flex items-center text-gray-500 text-sm">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+                {exp.location}
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (max-width: 768px) {
+    .timeline::before {
+      left: 1rem;
+    }
+  }
+</style> 

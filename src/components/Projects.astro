@@ -1,60 +1,40 @@
 ---
-const projects = [
-  {
-    title: "Malla Interactiva Enfermeria UC",
-    description: "Plataforma web interactiva para visualizar la malla curricular de Enfermería UC, mostrando cursos, semestres y prerrequisitos de forma dinámica. Desarrollado con React, JavaScript y TailwindCSS.",
-    image: "/images/example1.webp",
-    tags: ["React", "JavaScript", "Tailwind CSS"],
-    github: "https://github.com/pipp3/MallaEnfermeriaUC-React",
-    demo: "https://malla-enfermeria-uc-react.vercel.app"
-  },
-  {
-    title: "Project 2",
-    description: "E-commerce platform with real-time updates",
-    image: "https://via.placeholder.com/400x300",
-    tags: ["Next.js", "Prisma", "PostgreSQL"],
-    github: "https://github.com",
-    demo: "https://demo.com"
-  },
-  {
-    title: "Project 3",
-    description: "Mobile-first responsive dashboard",
-    image: "https://via.placeholder.com/400x300",
-    tags: ["Vue.js", "Tailwind CSS", "Firebase"],
-    github: "https://github.com",
-    demo: "https://demo.com"
-  }
-];
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Carousel from "./Carousel";
+
+
 ---
 
 <section id="projects" class="py-20 bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-3xl font-bold text-center mb-12 text-primary">Proyectos Destacados</h2>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {projects.map(project => (
-        <article class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform hover:-translate-y-2">
-          <img src={project.image} alt={project.title} class="w-full h-48 object-cover" />
-          <div class="p-6">
-            <h3 class="text-xl font-semibold mb-2">{project.title}</h3>
-            <p class="text-gray-600 mb-4">{project.description}</p>
-            <div class="flex flex-wrap gap-2 mb-4">
-              {project.tags.map(tag => (
-                <span class="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded-full">
-                  {tag}
-                </span>
-              ))}
-            </div>
-            <div class="flex space-x-4">
-              <a href={project.github} class="text-primary hover:text-secondary" target="_blank">
-                GitHub
-              </a>
-              <a href={project.demo} class="text-primary hover:text-secondary" target="_blank">
-                Live Demo
-              </a>
-            </div>
-          </div>
-        </article>
-      ))}
+    <h2 class="text-4xl font-bold text-center mb-4 text-primary tracking-tight">Proyectos Destacados</h2>
+    <p class="text-xl text-gray-600 text-center mb-12 leading-relaxed">Descubre mis trabajos más recientes y destacados</p>
+    
+    <Carousel client:only="react" />
+    
+    {/* Grid de proyectos */}
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+      {/* El grid se mantendrá vacío ya que los proyectos ahora están en el carrusel */}
     </div>
   </div>
 </section>
+
+<style>
+  .projects-carousel {
+    margin-bottom: 2rem;
+  }
+  
+  .projects-carousel .slick-prev,
+  .projects-carousel .slick-next {
+    color: #0891b2;
+  }
+  
+  .projects-carousel .slick-dots li button:before {
+    color: #0891b2;
+  }
+  
+  .projects-carousel .slick-dots li.slick-active button:before {
+    color: #0891b2;
+  }
+</style>

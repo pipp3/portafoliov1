@@ -10,11 +10,11 @@ export default function Hero() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">
-            Full Stack Developer
+          <h1 className="text-4xl md:text-6xl font-bold text-primary mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent tracking-tight">
+            Desarrollador Full Stack
           </h1>
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-600 mb-4">¡Hola! Soy Felipe Muñoz 👋</h2>
-          <p className="text-lg text-gray-600">
+          <h2 className="text-2xl md:text-4xl font-bold text-gray-600 mb-4 tracking-tight">¡Hola! Soy <span className="text-primary">Felipe Muñoz</span> 👋</h2>
+          <p className="text-lg text-gray-600 leading-relaxed">
           Soy un desarrollador Full Stack con enfoque en backend, pero también disfruto creando interfaces intuitivas. Actualmente, curso el último año de Ingeniería Civil Informática y Telecomunicaciones, en busca de práctica profesional y un lugar para desarrollar mi tesis. Me apasiona el código limpio y eficiente, quiero especializarme en el desarrollo de aplicaciones web escalables.
           </p>
           <br />

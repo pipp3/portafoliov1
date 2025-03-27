@@ -9,6 +9,10 @@ export default {
         textH2: '#3b82f6',
         textSpan: '#0284c7'
       },
+      fontFamily: {
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Poppins', 'sans-serif'],
+      },
     },
   },
   plugins: [],

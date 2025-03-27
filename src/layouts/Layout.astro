@@ -16,7 +16,7 @@ const { title, description = "Full Stack Developer Portfolio" } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/svg/princ.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
   </head>
   <body class="bg-gray-50">
     <slot />
@@ -39,5 +39,16 @@ const { title, description = "Full Stack Developer Portfolio" } = Astro.props;
   html {
     font-family: 'Inter', system-ui, sans-serif;
     scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  body {
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 </style>

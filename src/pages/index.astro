@@ -4,7 +4,9 @@ import Header from '../components/Header.astro';
 import Hero from '../components/Hero';
 import Projects from '../components/Projects.astro';
 import Skills from '../components/Skills.astro';
+import Experience from '../components/Experience.astro';
 import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
 ---
 
 <Layout title="Felipe Muñoz - Full Stack Developer">
@@ -12,7 +14,9 @@ import Contact from '../components/Contact.astro';
   <main>
     <Hero client:load />
     <Projects />
+    <Experience />
     <Skills />
     <Contact />
   </main>
+  <Footer />
 </Layout>
