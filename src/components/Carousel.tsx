@@ -18,17 +18,17 @@ const projects: Project[] = [
     title: "Malla Interactiva Enfermeria UC",
     description: "Plataforma web interactiva para visualizar la malla curricular de Enfermería UC, mostrando cursos, semestres y prerrequisitos de forma dinámica. Desarrollado con React, JavaScript y TailwindCSS.",
     image: "/images/example1.webp",
-    tags: ["React", "JavaScript", "Tailwind CSS"],
+    tags: ["React", "JavaScript", "Tailwind CSS","Vite"],
     github: "https://github.com/pipp3/MallaEnfermeriaUC-React",
     demo: "https://malla-enfermeria-uc-react.vercel.app"
   },
   {
-    title: "Project 2",
-    description: "E-commerce platform with real-time updates",
-    image: "https://via.placeholder.com/400x300",
-    tags: ["Next.js", "Prisma", "PostgreSQL"],
-    github: "https://github.com",
-    demo: "https://demo.com"
+    title: "Buscador de Recetas de Tragos",
+    description: "Este proyecto es una aplicación web desarrollada con React y TypeScript que permite gestionar y mostrar información sobre bebidas y tragos. La aplicación está construida utilizando Vite como bundler y herramienta de desarrollo.",
+    image: "/images/example2.webp",
+    tags: ["React", "TypeScript", "Vite", "Tailwind CSS"],
+    github: "https://github.com/pipp3/BuscadorBebidas",
+    demo: "https://buscador-bebidas-tragos.netlify.app"
   },
   {
     title: "Project 3",
