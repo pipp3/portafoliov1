@@ -31,12 +31,12 @@ const projects: Project[] = [
     demo: "https://buscador-bebidas-tragos.netlify.app"
   },
   {
-    title: "Project 3",
-    description: "Mobile-first responsive dashboard",
-    image: "https://via.placeholder.com/400x300",
-    tags: ["Vue.js", "Tailwind CSS", "Firebase"],
-    github: "https://github.com",
-    demo: "https://demo.com"
+    title: "Menu de Restaurante",
+    description: "Aplicacion web para mostrar el menu de un restaurante de sushi. Es totalmente responsive y tiene un diseño moderno. Creado con Next.js y Tailwind CSS, usando Firebase para gestionar los productos y Cloudinary para las imagenes.",
+    image: "/images/example3.webp",
+    tags: ["Next.js","React", "JavaScript","Tailwind CSS", "Firebase","Cloudinary"],
+    github: "https://github.com/pipp3/menu-SushiMax",
+    demo: "https://menu-sushi-max.vercel.app"
   },
   {
     title: "Sistema de Gestión de Inventario",
