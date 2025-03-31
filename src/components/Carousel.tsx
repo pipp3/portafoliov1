@@ -10,7 +10,7 @@ interface Project {
   image: string;
   tags: string[];
   github: string;
-  demo: string;
+  demo?: string;
 }
 
 const projects: Project[] = [
@@ -39,20 +39,18 @@ const projects: Project[] = [
     demo: "https://menu-sushi-max.vercel.app"
   },
   {
-    title: "Sistema de Gestión de Inventario",
-    description: "Aplicación web para gestionar inventario en tiempo real con análisis de datos y reportes personalizados. Incluye sistema de autenticación y roles de usuario.",
-    image: "https://via.placeholder.com/400x300",
-    tags: ["React", "Node.js", "MongoDB", "Express"],
-    github: "https://github.com",
-    demo: "https://demo.com"
+    title: "API de Gestion de Reservas de Salas",
+    description: "API para gestionar reservas de salas de un edificio, ya sea para reuniones, clases, etc. Creado con Node.js, Express, MongoDB para la Base de datos, Docker para los distintos contenedores, OAUTH2 para facilitar la autenticación y Swagger para la documentación. El proyecto aun sigue en desarrollo y se piensa en agregar un frontend para que los usuarios tengan una UI para interactuar con la API, ademas de añadir mas funcionalidades.",
+    image: "/images/example4.webp",
+    tags: ["Node.js", "Express", "MongoDB","Docker","OAUTH2","Swagger"],
+    github: "https://github.com/pipp3/roomyAPI"
   },
   {
-    title: "Aplicación de Clima",
-    description: "Aplicación web que muestra información del clima en tiempo real para diferentes ciudades. Incluye gráficos interactivos y pronóstico extendido.",
-    image: "https://via.placeholder.com/400x300",
-    tags: ["React", "TypeScript", "OpenWeather API", "Chart.js"],
-    github: "https://github.com",
-    demo: "https://demo.com"
+    title: "Sistema de Gestion de Clinica medica",
+    description: "Este proyecto implementa un sistema de gestión para una clínica médica utilizando una arquitectura orientada a servicios (SOA). El sistema está diseñado para manejar diferentes aspectos de la gestión médica, incluyendo citas, historiales médicos, notificaciones y más.",
+    image: "/images/example5.png",
+    tags: ["Python", "PostgreSQL", "Docker"],
+    github: "https://github.com/pipp3/ArquiSoftware",
   }
 ];
 
@@ -112,17 +110,19 @@ const Carousel: React.FC = () => {
                     </svg>
                     GitHub
                   </a>
-                  <a 
-                    href={project.demo} 
-                    className="inline-flex items-center px-4 py-2 bg-primary text-white rounded-lg hover:bg-secondary transition-colors duration-300" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                  >
-                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-                    </svg>
-                    Live Demo
-                  </a>
+                  {project.demo && (
+                    <a 
+                      href={project.demo} 
+                      className="inline-flex items-center px-4 py-2 bg-primary text-white rounded-lg hover:bg-secondary transition-colors duration-300" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                    >
+                      <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                      </svg>
+                      Live Demo
+                    </a>
+                  )}
                 </div>
               </div>
             </article>
