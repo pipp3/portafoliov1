@@ -1,4 +1,6 @@
 ---
+import ThemeToggle from './ThemeToggle';
+
 const navItems = [
   { href: "#about", text: "Acerca de mí" },
   { href: "#projects", text: "Proyectos" },
@@ -8,19 +10,20 @@ const navItems = [
 ];
 ---
 
-<header class="fixed w-full top-0 z-50 bg-white/80 backdrop-blur-sm shadow-sm">
+<header class="fixed w-full top-0 z-50 bg-white/80 dark:bg-dark-card/80 backdrop-blur-sm shadow-sm transition-colors duration-300">
   <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between h-16">
       <div class="flex items-center cursor-pointer">
-        <a href="/" class="text-xl font-bold text-primary">Felipe Muñoz Velasquez
+        <a href="/" class="text-xl font-bold text-primary dark:text-primary">Felipe Muñoz Velasquez
         </a>
       </div>
       <div class="hidden md:flex items-center space-x-8">
         {navItems.map(item => (
-          <a href={item.href} class="text-gray-700 hover:text-primary transition-colors">
+          <a href={item.href} class="text-gray-700 dark:text-dark-text hover:text-primary dark:hover:text-primary transition-colors">
             {item.text}
           </a>
         ))}
+        <ThemeToggle client:load />
       </div>
     </div>
   </nav>

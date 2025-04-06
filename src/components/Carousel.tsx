@@ -86,14 +86,14 @@ const Carousel: React.FC = () => {
       <SlickSlider {...settings}>
         {projects.map((project, index) => (
           <div key={index} className="px-4">
-            <article className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform hover:-translate-y-2">
+            <article className="bg-white dark:bg-dark-card rounded-lg shadow-lg overflow-hidden hover:-translate-y-2 transition-colors duration-300">
               <img src={project.image} alt={project.title} className="w-full h-48 object-cover" />
               <div className="p-6">
                 <h3 className="text-xl font-semibold mb-2 text-primary tracking-tight">{project.title}</h3>
-                <p className="text-gray-600 mb-4 leading-relaxed">{project.description}</p>
+                <p className="text-gray-600 dark:text-dark-text mb-4 leading-relaxed">{project.description}</p>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tags.map((tag, tagIndex) => (
-                    <span key={tagIndex} className="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded-full">
+                    <span key={tagIndex} className="bg-gray-100 dark:bg-dark-bg text-gray-800 dark:text-dark-text text-sm px-3 py-1 rounded-full">
                       {tag}
                     </span>
                   ))}
@@ -101,7 +101,7 @@ const Carousel: React.FC = () => {
                 <div className="flex space-x-4">
                   <a 
                     href={project.github} 
-                    className="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-800 rounded-lg hover:bg-primary hover:text-white transition-colors duration-300" 
+                    className="inline-flex items-center px-4 py-2 bg-gray-100 dark:bg-dark-bg text-gray-800 dark:text-dark-text rounded-lg hover:bg-primary hover:text-white transition-colors duration-300" 
                     target="_blank" 
                     rel="noopener noreferrer"
                   >

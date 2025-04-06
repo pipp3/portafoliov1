@@ -17,14 +17,14 @@ const socialLinks = [
 ];
 ---
 
-<section id="contact" class="py-20 bg-white">
+<section id="contact" class="py-20 bg-white dark:bg-dark-bg transition-colors duration-300">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-4xl font-bold text-center mb-4 text-primary tracking-tight">Contáctame</h2>
-    <p class="text-xl text-gray-600 text-center mb-12 leading-relaxed">¿Tienes un proyecto en mente? ¡Conversemos!</p>
+    <p class="text-xl text-gray-600 dark:text-dark-text text-center mb-12 leading-relaxed">¿Tienes un proyecto en mente? ¡Conversemos!</p>
     <div class="grid md:grid-cols-2 gap-12 items-center">
       <div>
-        <h3 class="text-2xl font-semibold mb-4 text-textH2 tracking-tight">Conectemos</h3>
-        <p class="text-gray-600 mb-6 leading-relaxed">
+        <h3 class="text-2xl font-semibold mb-4 text-textH2 dark:text-primary tracking-tight">Conectemos</h3>
+        <p class="text-gray-600 dark:text-dark-text mb-6 leading-relaxed">
           Siempre estoy abierto a nuevas oportunidades y colaboraciones. No dudes en ponerte en contacto conmigo.
         </p>
         <div class="flex space-x-4">
@@ -33,7 +33,7 @@ const socialLinks = [
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              class="text-gray-600 hover:text-primary transition-colors"
+              class="text-gray-600 dark:text-dark-text hover:text-primary transition-colors"
               set:html={link.icon}
             />
           ))}
@@ -41,32 +41,32 @@ const socialLinks = [
       </div>
       <form id="contact-form" class="space-y-6">
         <div>
-          <label for="name" class="block text-sm font-medium text-gray-700">Nombre</label>
+          <label for="name" class="block text-sm font-medium text-gray-700 dark:text-dark-text">Nombre</label>
           <input
             type="text"
             id="name"
             name="name"
-            class="mt-1 px-4 py-2 block w-full rounded-md border border-gray-400 bg-gray-50 shadow-sm focus:border-primary focus:ring-primary"
+            class="mt-1 px-4 py-2 block w-full rounded-md border border-gray-400 dark:border-dark-border bg-gray-50 dark:bg-dark-card text-gray-900 dark:text-dark-text shadow-sm focus:border-primary focus:ring-primary transition-colors duration-300"
             required
           />
         </div>
         <div>
-          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+          <label for="email" class="block text-sm font-medium text-gray-700 dark:text-dark-text">Email</label>
           <input
             type="email"
             id="email"
             name="email"
-            class="mt-1 px-4 py-2 block w-full rounded-md border border-gray-400 bg-gray-50 shadow-sm focus:border-primary focus:ring-primary"
+            class="mt-1 px-4 py-2 block w-full rounded-md border border-gray-400 dark:border-dark-border bg-gray-50 dark:bg-dark-card text-gray-900 dark:text-dark-text shadow-sm focus:border-primary focus:ring-primary transition-colors duration-300"
             required
           />
         </div>
         <div>
-          <label for="message" class="block text-sm font-medium text-gray-700">Mensaje</label>
+          <label for="message" class="block text-sm font-medium text-gray-700 dark:text-dark-text">Mensaje</label>
           <textarea
             id="message"
             name="message"
             rows="4"
-            class="mt-1 px-4 py-2 block w-full rounded-md border border-gray-400 bg-gray-50 shadow-sm focus:border-primary focus:ring-primary"
+            class="mt-1 px-4 py-2 block w-full rounded-md border border-gray-400 dark:border-dark-border bg-gray-50 dark:bg-dark-card text-gray-900 dark:text-dark-text shadow-sm focus:border-primary focus:ring-primary transition-colors duration-300"
             required
           ></textarea>
         </div>

@@ -45,25 +45,25 @@ const skills = {
 };
 ---
 
-<section id="skills" class="py-20 bg-gray-50">
+<section id="skills" class="py-20 bg-gray-50 dark:bg-dark-bg transition-colors duration-300">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-4xl font-bold text-center mb-4 text-primary tracking-tight">Habilidades y Tecnologías</h2>
-    <p class="text-xl text-gray-600 text-center mb-12 leading-relaxed">Mi stack tecnológico y herramientas principales</p>
+    <p class="text-xl text-gray-600 dark:text-dark-text text-center mb-12 leading-relaxed">Mi stack tecnológico y herramientas principales</p>
     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
       {Object.entries(skills).map(([category, items], index) => (
-        <div class="skill-card bg-white p-6 rounded-lg shadow-lg cursor-pointer opacity-0 translate-y-4 transition-all duration-500 hover:scale-105" data-index={index}>
-          <h3 class="text-xl font-semibold mb-4 text-textH2 tracking-tight">{category}</h3>
+        <div class="skill-card bg-white dark:bg-dark-card p-6 rounded-lg shadow-lg cursor-pointer opacity-0 translate-y-4 transition-all duration-500 hover:scale-105" data-index={index}>
+          <h3 class="text-xl font-semibold mb-4 text-textH2 dark:text-primary tracking-tight">{category}</h3>
           <ul class="space-y-3">
             {items.map((skill, skillIndex) => (
               <li class="skill-item flex items-center opacity-0 -translate-x-4 transition-all duration-300" data-index={skillIndex}>
                 {skill.icon ? (
-                  <img src={skill.icon} alt={skill.name} class="w-6 h-6 mr-3" />
+                  <img src={skill.icon} alt={skill.name} class="w-6 h-6 mr-3 dark:invert dark:brightness-200" />
                 ) : (
                   <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                   </svg>
                 )}
-                <span class="text-textSpan leading-relaxed">{skill.name}</span>
+                <span class="text-textSpan dark:text-gray-200 leading-relaxed">{skill.name}</span>
               </li>
             ))}
           </ul>

@@ -21,10 +21,10 @@ const experiences: Experience[] = [
 ];
 ---
 
-<section id="experience" class="py-20 bg-gray-50">
+<section id="experience" class="py-20 bg-gray-50 dark:bg-dark-bg transition-colors duration-300">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-4xl font-bold text-center mb-4 text-primary tracking-tight">Experiencia Laboral</h2>
-    <p class="text-xl text-gray-600 text-center mb-12 leading-relaxed">Mi trayectoria profesional y roles desempeñados</p>
+    <p class="text-xl text-gray-600 dark:text-dark-text text-center mb-12 leading-relaxed">Mi trayectoria profesional y roles desempeñados</p>
     
     <div class="space-y-8">
       {experiences.map((exp, index) => (
@@ -37,29 +37,29 @@ const experiences: Experience[] = [
             index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
           }`}>
             {/* Círculo decorativo */}
-            <div class="absolute left-0 md:left-1/2 w-8 h-8 bg-primary rounded-full -translate-x-1/2 border-4 border-white shadow-lg"></div>
+            <div class="absolute left-0 md:left-1/2 w-8 h-8 bg-primary rounded-full -translate-x-1/2 border-4 border-white dark:border-dark-card shadow-lg"></div>
             
             {/* Contenido principal */}
-            <div class={`w-full md:w-1/2 p-6 bg-white rounded-lg shadow-lg ${
+            <div class={`w-full md:w-1/2 p-6 bg-white dark:bg-dark-card rounded-lg shadow-lg transition-colors duration-300 ${
               index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'
             }`}>
               <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 mb-4">
                 <h3 class="text-xl font-semibold text-primary tracking-tight">{exp.position}</h3>
-                <span class="text-sm text-gray-500">{exp.period}</span>
+                <span class="text-sm text-gray-500 dark:text-dark-muted">{exp.period}</span>
               </div>
               
-              <h4 class="text-lg font-medium text-textH2 mb-2">{exp.company}</h4>
-              <p class="text-gray-600 mb-4 leading-relaxed">{exp.description}</p>
+              <h4 class="text-lg font-medium text-textH2 dark:text-primary mb-2">{exp.company}</h4>
+              <p class="text-gray-600 dark:text-dark-text mb-4 leading-relaxed">{exp.description}</p>
               
               <div class="flex flex-wrap gap-2 mb-4">
                 {exp.technologies.map((tech) => (
-                  <span class="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded-full">
+                  <span class="bg-gray-100 dark:bg-dark-bg text-gray-800 dark:text-dark-text text-sm px-3 py-1 rounded-full">
                     {tech}
                   </span>
                 ))}
               </div>
               
-              <div class="flex items-center text-gray-500 text-sm">
+              <div class="flex items-center text-gray-500 dark:text-dark-muted text-sm">
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
