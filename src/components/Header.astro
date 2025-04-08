@@ -25,6 +25,61 @@ const navItems = [
         ))}
         <ThemeToggle client:load />
       </div>
+      <!-- Botón del menú hamburguesa - visible solo en móvil -->
+      <div class="md:hidden flex items-center">
+        <button id="menu-toggle" class="text-gray-700 dark:text-dark-text hover:text-primary dark:hover:text-primary focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Menú móvil -->
+    <div id="mobile-menu" class="md:hidden hidden opacity-0 transform -translate-y-2 absolute w-full left-0 bg-transparent transition-all duration-300 ease-in-out">
+      <div class="px-2 pt-2 pb-3 space-y-1 flex flex-col bg-white dark:bg-dark-card rounded-md shadow-lg mt-2 mx-4 sm:mx-6 lg:mx-8 transition-all duration-300">
+        {navItems.map(item => (
+          <a href={item.href} class="block px-3 py-2 text-gray-700 dark:text-dark-text hover:text-primary dark:hover:text-primary hover:bg-gray-50 dark:hover:bg-dark-hover rounded-md transition-colors">
+            {item.text}
+          </a>
+        ))}
+        <div class="px-3 py-2">
+          <ThemeToggle client:load />
+        </div>
+      </div>
     </div>
   </nav>
 </header>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if (menuToggle && mobileMenu) {
+      menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        
+        // Pequeño retraso para permitir que se aplique primero la visibilidad
+        setTimeout(() => {
+          mobileMenu.classList.toggle('opacity-0');
+          mobileMenu.classList.toggle('-translate-y-2');
+        }, 10);
+      });
+      
+      // Cerrar el menú cuando se hace clic en un enlace
+      const menuLinks = mobileMenu.querySelectorAll('a');
+      menuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('opacity-0');
+          mobileMenu.classList.add('-translate-y-2');
+          
+          // Pequeño retraso antes de ocultar completamente
+          setTimeout(() => {
+            mobileMenu.classList.add('hidden');
+          }, 300);
+        });
+      });
+    }
+  });
+</script>
