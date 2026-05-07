@@ -40,6 +40,12 @@ const socialLinks = [
         </div>
       </div>
       <form id="contact-form" class="space-y-6">
+        <input
+          name="_honeypot"
+          tabindex="-1"
+          autocomplete="off"
+          style="position:absolute;opacity:0;pointer-events:none;height:0;"
+        />
         <div>
           <label for="name" class="block text-sm font-medium text-gray-700 dark:text-dark-text">Nombre</label>
           <input
@@ -72,6 +78,7 @@ const socialLinks = [
         </div>
         <button
           type="submit"
+          aria-busy="false"
           class="w-full bg-primary text-white px-6 py-3 rounded-lg hover:bg-secondary transition-colors font-medium flex items-center justify-center gap-2"
         >
           <svg id="btn-spinner" class="hidden animate-spin w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -90,6 +97,9 @@ const socialLinks = [
   import Swal from 'sweetalert2';
 
   emailjs.init(import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY);
+
+  const COOLDOWN_MS = 30_000;
+  let lastSent = 0;
 
   const form = document.getElementById('contact-form') as HTMLFormElement;
   const submitButton = form?.querySelector('button[type="submit"]') as HTMLButtonElement;
@@ -143,13 +153,39 @@ const socialLinks = [
 
   function setLoading(loading: boolean) {
     submitButton.disabled = loading;
+    submitButton.setAttribute('aria-busy', String(loading));
     btnSpinner.classList.toggle('hidden', !loading);
     btnText.textContent = loading ? 'Enviando...' : 'Enviar Mensaje';
+  }
+
+  function getErrorMessage(error: { status?: number; text?: string }): string {
+    if (error.status === 429) return 'Demasiadas solicitudes. Espera unos minutos e intenta nuevamente.';
+    if (error.status === 400) return 'Los datos del formulario no son válidos. Revisa los campos e intenta de nuevo.';
+    if (error.status === 403) return 'No tienes permiso para enviar este mensaje.';
+    if (!navigator.onLine) return 'Sin conexión a internet. Verifica tu red e intenta nuevamente.';
+    return 'No se pudo enviar el mensaje. Por favor, intenta nuevamente más tarde.';
   }
 
   if (form && submitButton) {
     form.addEventListener('submit', function(e) {
       e.preventDefault();
+
+      const honeypot = form.querySelector<HTMLInputElement>('[name="_honeypot"]');
+      if (honeypot?.value) return;
+
+      const remaining = COOLDOWN_MS - (Date.now() - lastSent);
+      if (remaining > 0) {
+        const secs = Math.ceil(remaining / 1000);
+        Swal.fire({
+          icon: 'warning',
+          title: 'Espera un momento',
+          text: `Puedes volver a enviar en ${secs} segundo${secs !== 1 ? 's' : ''}.`,
+          confirmButtonColor: '#4F46E5',
+          confirmButtonText: 'Aceptar'
+        });
+        return;
+      }
+
       if (!validateForm()) return;
 
       setLoading(true);
@@ -161,6 +197,7 @@ const socialLinks = [
         import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY
       )
       .then(function() {
+        lastSent = Date.now();
         Swal.fire({
           icon: 'success',
           title: '¡Mensaje enviado!',
@@ -169,15 +206,15 @@ const socialLinks = [
           confirmButtonText: 'Aceptar'
         });
         form.reset();
-      }, function(error) {
+      }, function(error: { status?: number; text?: string }) {
         Swal.fire({
           icon: 'error',
-          title: 'Error',
-          text: 'No se pudo enviar el mensaje. Por favor, intenta nuevamente.',
+          title: 'Error al enviar',
+          text: getErrorMessage(error),
           confirmButtonColor: '#4F46E5',
           confirmButtonText: 'Aceptar'
         });
-        console.error('Error:', error);
+        console.error('EmailJS error:', error);
       })
       .finally(function() {
         setLoading(false);
