@@ -47,8 +47,8 @@ const socialLinks = [
             id="name"
             name="name"
             class="mt-1 px-4 py-2 block w-full rounded-md border border-gray-400 dark:border-dark-border bg-gray-50 dark:bg-dark-card text-gray-900 dark:text-dark-text shadow-sm focus:border-primary focus:ring-primary transition-colors duration-300"
-            required
           />
+          <p id="error-name" class="mt-1 text-sm text-red-500 hidden"></p>
         </div>
         <div>
           <label for="email" class="block text-sm font-medium text-gray-700 dark:text-dark-text">Email</label>
@@ -57,8 +57,8 @@ const socialLinks = [
             id="email"
             name="email"
             class="mt-1 px-4 py-2 block w-full rounded-md border border-gray-400 dark:border-dark-border bg-gray-50 dark:bg-dark-card text-gray-900 dark:text-dark-text shadow-sm focus:border-primary focus:ring-primary transition-colors duration-300"
-            required
           />
+          <p id="error-email" class="mt-1 text-sm text-red-500 hidden"></p>
         </div>
         <div>
           <label for="message" class="block text-sm font-medium text-gray-700 dark:text-dark-text">Mensaje</label>
@@ -67,14 +67,18 @@ const socialLinks = [
             name="message"
             rows="4"
             class="mt-1 px-4 py-2 block w-full rounded-md border border-gray-400 dark:border-dark-border bg-gray-50 dark:bg-dark-card text-gray-900 dark:text-dark-text shadow-sm focus:border-primary focus:ring-primary transition-colors duration-300"
-            required
           ></textarea>
+          <p id="error-message" class="mt-1 text-sm text-red-500 hidden"></p>
         </div>
         <button
           type="submit"
-          class="w-full bg-primary text-white px-6 py-3 rounded-lg hover:bg-secondary transition-colors font-medium"
+          class="w-full bg-primary text-white px-6 py-3 rounded-lg hover:bg-secondary transition-colors font-medium flex items-center justify-center gap-2"
         >
-          Enviar Mensaje
+          <svg id="btn-spinner" class="hidden animate-spin w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+          </svg>
+          <span id="btn-text">Enviar Mensaje</span>
         </button>
       </form>
     </div>
@@ -85,31 +89,70 @@ const socialLinks = [
   import emailjs from '@emailjs/browser';
   import Swal from 'sweetalert2';
 
-  // Inicializar EmailJS con tu Public Key
   emailjs.init(import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY);
 
   const form = document.getElementById('contact-form') as HTMLFormElement;
   const submitButton = form?.querySelector('button[type="submit"]') as HTMLButtonElement;
+  const btnSpinner = document.getElementById('btn-spinner') as HTMLElement;
+  const btnText = document.getElementById('btn-text') as HTMLElement;
+
+  const fieldErrors: Record<string, string> = {
+    name: 'error-name',
+    email: 'error-email',
+    message: 'error-message',
+  };
+
+  function showFieldError(field: string, msg: string) {
+    const el = document.getElementById(fieldErrors[field]);
+    const input = form.querySelector(`[name="${field}"]`) as HTMLElement;
+    if (el) { el.textContent = msg; el.classList.remove('hidden'); }
+    if (input) input.classList.add('border-red-500');
+  }
+
+  function clearFieldError(field: string) {
+    const el = document.getElementById(fieldErrors[field]);
+    const input = form.querySelector(`[name="${field}"]`) as HTMLElement;
+    if (el) { el.textContent = ''; el.classList.add('hidden'); }
+    if (input) input.classList.remove('border-red-500');
+  }
+
+  function validateForm(): boolean {
+    let valid = true;
+    const name = (form.querySelector('[name="name"]') as HTMLInputElement).value.trim();
+    const email = (form.querySelector('[name="email"]') as HTMLInputElement).value.trim();
+    const message = (form.querySelector('[name="message"]') as HTMLTextAreaElement).value.trim();
+
+    clearFieldError('name');
+    clearFieldError('email');
+    clearFieldError('message');
+
+    if (name.length < 2) {
+      showFieldError('name', 'El nombre debe tener al menos 2 caracteres.');
+      valid = false;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showFieldError('email', 'Ingresa un email válido.');
+      valid = false;
+    }
+    if (message.length < 10) {
+      showFieldError('message', 'El mensaje debe tener al menos 10 caracteres.');
+      valid = false;
+    }
+    return valid;
+  }
+
+  function setLoading(loading: boolean) {
+    submitButton.disabled = loading;
+    btnSpinner.classList.toggle('hidden', !loading);
+    btnText.textContent = loading ? 'Enviando...' : 'Enviar Mensaje';
+  }
 
   if (form && submitButton) {
     form.addEventListener('submit', function(e) {
       e.preventDefault();
-      
-      const originalText = submitButton.textContent;
-      submitButton.textContent = 'Enviando...';
-      submitButton.disabled = true;
+      if (!validateForm()) return;
 
-      // Mostrar alerta de carga
-      Swal.fire({
-        title: 'Enviando mensaje...',
-        text: 'Por favor, espera un momento',
-        allowOutsideClick: false,
-        allowEscapeKey: false,
-        showConfirmButton: false,
-        didOpen: () => {
-          Swal.showLoading();
-        }
-      });
+      setLoading(true);
 
       emailjs.sendForm(
         import.meta.env.PUBLIC_EMAILJS_SERVICE_ID,
@@ -118,7 +161,6 @@ const socialLinks = [
         import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY
       )
       .then(function() {
-        // Mostrar alerta de éxito
         Swal.fire({
           icon: 'success',
           title: '¡Mensaje enviado!',
@@ -128,7 +170,6 @@ const socialLinks = [
         });
         form.reset();
       }, function(error) {
-        // Mostrar alerta de error
         Swal.fire({
           icon: 'error',
           title: 'Error',
@@ -139,8 +180,7 @@ const socialLinks = [
         console.error('Error:', error);
       })
       .finally(function() {
-        submitButton.textContent = originalText;
-        submitButton.disabled = false;
+        setLoading(false);
       });
     });
   }
