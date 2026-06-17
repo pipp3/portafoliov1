@@ -1,5 +1,6 @@
 ---
 import Preloader from '../components/Preloader.astro';
+import '../styles/global.css';
 
 interface Props {
   title: string;
@@ -34,33 +35,3 @@ const { title, description = "Full Stack Developer Portfolio" } = Astro.props;
     <slot />
   </body>
 </html>
-
-<style is:global>
-  :root {
-    --accent: 136, 58, 234;
-    --accent-light: 224, 204, 250;
-    --accent-dark: 49, 10, 101;
-    --accent-gradient: linear-gradient(
-      45deg,
-      rgb(var(--accent)),
-      rgb(var(--accent-light)) 30%,
-      white 60%
-    );
-  }
-  
-  html {
-    font-family: 'Inter', system-ui, sans-serif;
-    scroll-behavior: smooth;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Poppins', sans-serif;
-    letter-spacing: -0.02em;
-  }
-
-  body {
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-</style>

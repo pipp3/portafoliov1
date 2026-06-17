@@ -11,9 +11,6 @@ importers:
       '@astrojs/react':
         specifier: ^3.6.2
         version: 3.6.3(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(lightningcss@1.32.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@astrojs/tailwind':
-        specifier: ^2.1.3
-        version: 2.1.3(tailwindcss@3.4.19)
       '@emailjs/browser':
         specifier: ^4.4.1
         version: 4.4.1
@@ -59,6 +56,13 @@ importers:
       vite:
         specifier: ^8.0.16
         version: 8.0.16(esbuild@0.27.7)(jiti@1.21.7)
+    devDependencies:
+      autoprefixer:
+        specifier: ^10.4.21
+        version: 10.5.0(postcss@8.5.15)
+      postcss:
+        specifier: ^8.5.3
+        version: 8.5.15
 
 packages:
 
@@ -87,11 +91,6 @@ packages:
       '@types/react-dom': ^17.0.17 || ^18.0.6
       react: ^17.0.2 || ^18.0.0 || ^19.0.0-beta
       react-dom: ^17.0.2 || ^18.0.0 || ^19.0.0-beta
-
-  '@astrojs/tailwind@2.1.3':
-    resolution: {integrity: sha512-W7UUUBJ3itDGcvJPvk+M/eNKFlLBYGODIzPsJ3zuehNzcJDhv/Ues+TzrpSvd0FaKfmV9Zlq3ZtToy96xxJU6Q==}
-    peerDependencies:
-      tailwindcss: ^3.0.24
 
   '@astrojs/telemetry@3.3.2':
     resolution: {integrity: sha512-j8DNruA8ors99Al39RYZPJK4DC1bKkoNm93mAMuBhY9TCNC4R8n1q7ovFnJ5qhGh5Lsh7pa1gpQVpYpsJPeTHQ==}
@@ -701,9 +700,6 @@ packages:
   '@oxc-project/types@0.133.0':
     resolution: {integrity: sha512-KzkdCd6Uxqnf6l3HOw1xfatAlUURA0g14cvBYFyJ5SaNOQbOUvBr9PKArcPcrNIeRsBdgcUzOGrhKveVpvOIGA==}
 
-  '@proload/core@0.3.3':
-    resolution: {integrity: sha512-7dAFWsIK84C90AMl24+N/ProHKm4iw0akcnoKjRvbfHifJZBLhaDsDus1QJmhG12lXj4e/uB/8mB/0aduCW+NQ==}
-
   '@rolldown/binding-android-arm64@1.0.3':
     resolution: {integrity: sha512-454rs7jHngixp/NMxd5srYD57OnzSlZ/eFTETjORQHLwJG1lRtmNOJcBerZlfu4GjKqeq8aCCIQrMdHyhI51Hw==}
     engines: {node: ^20.19.0 || >=22.12.0}
@@ -1206,10 +1202,6 @@ packages:
 
   decode-named-character-reference@1.3.0:
     resolution: {integrity: sha512-GtpQYB283KrPp6nRw50q3U9/VfOutZOe103qlN7BPP6Ad27xYnOIWv4lPzo8HCAL+mMZofJ9KEy30fq6MfaK6Q==}
-
-  deepmerge@4.3.1:
-    resolution: {integrity: sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A==}
-    engines: {node: '>=0.10.0'}
 
   defu@6.1.7:
     resolution: {integrity: sha512-7z22QmUWiQ/2d0KkdYmANbRUVABpZ9SNYyH5vx6PZ+nE5bcC0l7uFvEfHlyld/HcGBFTL536ClDt3DEcSlEJAQ==}
@@ -2484,13 +2476,6 @@ snapshots:
       - supports-color
       - terser
 
-  '@astrojs/tailwind@2.1.3(tailwindcss@3.4.19)':
-    dependencies:
-      '@proload/core': 0.3.3
-      autoprefixer: 10.5.0(postcss@8.5.15)
-      postcss: 8.5.15
-      tailwindcss: 3.4.19
-
   '@astrojs/telemetry@3.3.2':
     dependencies:
       ci-info: 4.4.0
@@ -2943,11 +2928,6 @@ snapshots:
   '@oslojs/encoding@1.1.0': {}
 
   '@oxc-project/types@0.133.0': {}
-
-  '@proload/core@0.3.3':
-    dependencies:
-      deepmerge: 4.3.1
-      escalade: 3.2.0
 
   '@rolldown/binding-android-arm64@1.0.3':
     optional: true
@@ -3428,8 +3408,6 @@ snapshots:
   decode-named-character-reference@1.3.0:
     dependencies:
       character-entities: 2.0.2
-
-  deepmerge@4.3.1: {}
 
   defu@6.1.7: {}
 
