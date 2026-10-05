@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
-import react from '@astrojs/react';
 
-export default defineConfig({
-  integrations: [react()],
-});
+// Ya no queda ninguna isla de React: el sitio es HTML + CSS y tres
+// scripts pequeños. Para volver a usar componentes .tsx:
+//   pnpm astro add react
+export default defineConfig();

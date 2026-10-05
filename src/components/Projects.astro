@@ -1,40 +1,362 @@
 ---
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Carousel from "./Carousel";
+interface Project {
+  title: string;
+  blurb: string;
+  image: string;
+  tags: string[];
+  github?: string;
+  demo?: string;
+  live?: boolean;
+}
 
+const projects: Project[] = [
+  {
+    title: 'Malla Interactiva Enfermería UC',
+    blurb:
+      'Visualizador de la malla curricular completa: cursos, semestres y prerrequisitos encadenados. Al tocar un ramo se iluminan sus dependencias hacia adelante y hacia atrás.',
+    image: '/images/example1.webp',
+    tags: ['React', 'JavaScript', 'Tailwind CSS', 'Vite'],
+    github: 'https://github.com/pipp3/MallaEnfermeriaUC-React',
+    demo: 'https://malla-enfermeria-uc-react.vercel.app',
+    live: true,
+  },
+  {
+    title: 'Landing ChainStrike',
+    blurb:
+      'Landing para un producto blockchain. Astro para servir HTML casi puro y Framer Motion sólo donde el movimiento aporta: reveals por sección y estados de los CTA.',
+    image: '/images/example6.webp',
+    tags: ['Astro', 'Tailwind CSS', 'TypeScript', 'Framer Motion'],
+    github: 'https://github.com/pipp3/landing-chainstrike',
+    demo: 'https://landing-chainstrike.vercel.app',
+    live: true,
+  },
+  {
+    title: 'Menú SushiMax',
+    blurb:
+      'Carta digital para un restaurante de sushi. El local edita productos y precios desde Firebase; las imágenes se sirven optimizadas por Cloudinary. Pensado primero para el teléfono.',
+    image: '/images/example3.webp',
+    tags: ['Next.js', 'React', 'Tailwind CSS', 'Firebase', 'Cloudinary'],
+    github: 'https://github.com/pipp3/menu-SushiMax',
+    demo: 'https://menu-sushi-max.vercel.app',
+    live: true,
+  },
+  {
+    title: 'Roomy · API de reservas',
+    blurb:
+      'API para reservar salas de un edificio: reuniones, clases, bloqueos. Express sobre MongoDB, contenedores separados con Docker, autenticación OAuth2 y documentación viva en Swagger.',
+    image: '/images/example4.webp',
+    tags: ['Node.js', 'Express', 'MongoDB', 'Docker', 'OAuth2', 'Swagger'],
+    github: 'https://github.com/pipp3/roomyAPI',
+  },
+  {
+    title: 'Manicero Lucas · Showroom',
+    blurb:
+      'Showroom para un local de frutos secos: catálogo administrable y fichas de producto. En desarrollo activo.',
+    image: '/images/example7.webp',
+    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Firebase'],
+    demo: 'https://manicero-lucas-showroom.vercel.app',
+    live: true,
+  },
+  {
+    title: 'Buscador de recetas de tragos',
+    blurb:
+      'Aplicación para buscar y guardar recetas de cócteles contra una API pública. React + TypeScript sobre Vite, con estado global y persistencia local.',
+    image: '/images/example2.webp',
+    tags: ['React', 'TypeScript', 'Vite', 'Tailwind CSS'],
+    github: 'https://github.com/pipp3/BuscadorBebidas',
+    demo: 'https://buscador-bebidas-tragos.netlify.app',
+    live: true,
+  },
+  {
+    title: 'Gestión de clínica médica · SOA',
+    blurb:
+      'Sistema de gestión clínica con arquitectura orientada a servicios: citas, historiales y notificaciones como servicios independientes, cada uno en su contenedor.',
+    image: '/images/example5.png',
+    tags: ['Python', 'PostgreSQL', 'Docker'],
+    github: 'https://github.com/pipp3/ArquiSoftware',
+  },
+];
 
+const liveCount = projects.filter((p) => p.live).length;
+const pad = (n: number) => String(n).padStart(3, '0');
 ---
 
-<section id="projects" class="py-20 bg-white dark:bg-dark-bg transition-colors duration-300">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-4xl font-bold text-center mb-4 text-primary tracking-tight">Proyectos Destacados</h2>
-    <p class="text-xl text-gray-600 dark:text-dark-text text-center mb-12 leading-relaxed">Descubre mis trabajos más recientes y destacados</p>
-    
-    <Carousel client:only="react" />
-    
-    {/* Grid de proyectos */}
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-      {/* El grid se mantendrá vacío ya que los proyectos ahora están en el carrusel */}
+<section id="proyectos" class="projects">
+  <div class="shell">
+    <div class="head">
+      <div>
+        <p class="kicker"><b class="mono">02 — Proyectos</b><span class="rule"></span></p>
+        <h2 class="mask-line"><span>Seleccionados</span></h2>
+      </div>
+      <p class="meta mono" data-reveal>
+        <span>{pad(projects.length)} proyectos</span>
+        <span class="lit">{pad(liveCount)} en producción</span>
+      </p>
+    </div>
+
+    <div class="index">
+      {projects.map((p, i) => (
+        <article class:list={['row', { open: i === 0 }]} data-reveal style={`--rev-d:${i * 40}ms`}>
+          <h3>
+            <button type="button" class="line" aria-expanded={i === 0 ? 'true' : 'false'}>
+              <span class="num mono">{pad(i + 1)}</span>
+              <span class="ttl dsp">{p.title}</span>
+              <span class="tags mono" aria-hidden="true">
+                {p.tags.slice(0, 3).map((t) => <span>{t}</span>)}
+              </span>
+              <span class="go" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" /></svg>
+              </span>
+            </button>
+          </h3>
+
+          <div class="panel">
+            <div>
+              <div class="panel-in">
+                <div class="text">
+                  <p>{p.blurb}</p>
+                  <ul class="chips" aria-label="Tecnologías">
+                    {p.tags.map((t) => <li class="chip"><span>{t}</span></li>)}
+                  </ul>
+                  <div class="acts">
+                    {p.demo && (
+                      <a href={p.demo} class="btn btn-solid" target="_blank" rel="noopener noreferrer">
+                        Ver demo <span class="arw" aria-hidden="true">→</span>
+                      </a>
+                    )}
+                    {p.github && (
+                      <a href={p.github} class="btn btn-ghost" target="_blank" rel="noopener noreferrer">
+                        <svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" /></svg>
+                        Código
+                      </a>
+                    )}
+                    {!p.demo && !p.github && <span class="soon mono">Privado</span>}
+                  </div>
+                </div>
+
+                <div class="shot" data-tilt>
+                  <img src={p.image} alt={`Captura de ${p.title}`} loading="lazy" width="592" height="312" />
+                  <span class="glare" aria-hidden="true"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
     </div>
   </div>
 </section>
 
 <style>
-  .projects-carousel {
-    margin-bottom: 2rem;
+  .projects { position: relative; padding: clamp(80px, 11vw, 132px) 0; }
+
+  .head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: clamp(32px, 5vw, 54px);
   }
-  
-  .projects-carousel .slick-prev,
-  .projects-carousel .slick-next {
-    color: #0891b2;
+  h2 { font-size: clamp(40px, 6.4vw, 72px); }
+  .meta {
+    text-align: right;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--faint);
+    line-height: 2;
+    margin: 0;
+    flex: 0 0 auto;
   }
-  
-  .projects-carousel .slick-dots li button:before {
-    color: #0891b2;
+  .meta span { display: block; }
+  .meta .lit { color: var(--lit); }
+
+  .index { border-top: 1px solid var(--hair); }
+  .row { border-bottom: 1px solid var(--hair); }
+  .row h3 { margin: 0; font: inherit; letter-spacing: normal; line-height: inherit; }
+
+  .line {
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 62px 1fr 44px;
+    align-items: center;
+    gap: 16px;
+    min-height: 76px;
+    padding: 14px 0;
+    background: none;
+    border: 0;
+    text-align: left;
+    cursor: pointer;
+    color: inherit;
   }
-  
-  .projects-carousel .slick-dots li.slick-active button:before {
-    color: #0891b2;
+  .line::before {
+    content: '';
+    position: absolute;
+    inset: 0 -12px;
+    border-radius: 10px;
+    background: linear-gradient(90deg, color-mix(in srgb, var(--cy) 12%, transparent), transparent 70%);
+    opacity: 0;
+    transition: opacity var(--t-btn) var(--ease-std);
+  }
+  .line:hover::before,
+  .row.open .line::before { opacity: 1; }
+
+  .num {
+    position: relative;
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    color: var(--faint);
+    transition: color var(--t-btn) var(--ease-std);
+  }
+  .ttl {
+    position: relative;
+    font-size: clamp(20px, 3.2vw, 29px);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    color: var(--muted);
+    transition: color var(--t-btn) var(--ease-std), transform var(--t-btn) var(--ease-expo);
+  }
+  .line:hover .ttl,
+  .row.open .ttl { color: var(--fg); transform: translateX(8px); }
+  .line:hover .num,
+  .row.open .num { color: var(--lit); }
+
+  .tags { display: none; }
+
+  .go {
+    position: relative;
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    display: grid;
+    place-items: center;
+    justify-self: end;
+    transition: transform var(--t-btn) var(--ease-spring), border-color var(--t-btn) var(--ease-std), background-color var(--t-btn) var(--ease-std);
+  }
+  .go svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+  .line:hover .go { border-color: var(--cy); }
+  .row.open .go {
+    transform: rotate(135deg);
+    border-color: var(--cy);
+    background: color-mix(in srgb, var(--cy) 18%, transparent);
+  }
+
+  /* La altura la pone el script: Chrome no interpola 0fr↔1fr cuando
+     el valor inicial ya viene resuelto en píxeles. */
+  .panel {
+    height: 0;
+    overflow: hidden;
+    transition: height var(--t-row) var(--ease-expo);
+  }
+
+  .panel-in {
+    display: grid;
+    gap: 28px;
+    padding: 4px 0 34px 0;
+  }
+  .text p {
+    margin: 0 0 16px;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--muted);
+    max-width: 58ch;
+    text-wrap: pretty;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 7px; list-style: none; margin: 0 0 20px; padding: 0; }
+  .acts { display: flex; flex-wrap: wrap; gap: 10px; }
+  .acts .btn { min-height: 46px; font-size: 13.5px; padding: 0 18px; }
+  .gh { width: 17px; height: 17px; fill: currentColor; }
+  .soon {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--faint);
+    align-self: center;
+  }
+
+  /* Inclinación + foco radial que sigue al cursor. */
+  .shot {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 22px 48px rgba(0, 0, 0, 0.32);
+    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+    transition: transform var(--t-btn) var(--ease-std);
+  }
+  .shot img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; aspect-ratio: 16 / 9; }
+  .glare {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(240px 240px at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--lit) 30%, transparent), transparent 70%);
+    opacity: 0;
+    transition: opacity var(--t-btn) var(--ease-std);
+  }
+  .shot:hover .glare { opacity: 1; }
+
+  @media (min-width: 760px) {
+    .line { grid-template-columns: 70px 1fr minmax(0, 300px) 44px; }
+    .tags { display: flex; flex-wrap: nowrap; gap: 6px; justify-content: flex-end; position: relative; overflow: hidden; }
+    .tags span {
+      font-size: 9.5px;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--faint);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 4px 9px;
+      white-space: nowrap;
+    }
+  }
+  @media (min-width: 1000px) {
+    .panel-in { grid-template-columns: 1fr 380px; align-items: center; padding-left: 70px; gap: 44px; }
   }
 </style>
+
+<script>
+  const rows = document.querySelectorAll<HTMLElement>('#proyectos .row');
+
+  function measure(panel: HTMLElement) {
+    return (panel.firstElementChild as HTMLElement).offsetHeight;
+  }
+
+  function setOpen(row: HTMLElement, open: boolean) {
+    const panel = row.querySelector<HTMLElement>('.panel');
+    if (!panel) return;
+
+    // Al cerrar desde 'auto' hay que fijar los píxeles antes, o el
+    // navegador no tiene desde dónde interpolar.
+    if (!open && panel.style.height === 'auto') {
+      panel.style.height = `${measure(panel)}px`;
+      void panel.offsetHeight;
+    }
+
+    row.classList.toggle('open', open);
+    row.querySelector('button')?.setAttribute('aria-expanded', String(open));
+    panel.style.height = open ? `${measure(panel)}px` : '0px';
+  }
+
+  for (const row of rows) {
+    const panel = row.querySelector<HTMLElement>('.panel');
+    if (!panel) continue;
+
+    // La primera fila llega abierta desde el servidor.
+    if (row.classList.contains('open')) panel.style.height = 'auto';
+
+    // Ya asentada, 'auto' deja que el contenido cambie de alto solo.
+    panel.addEventListener('transitionend', (event) => {
+      if (event.propertyName === 'height' && row.classList.contains('open')) {
+        panel.style.height = 'auto';
+      }
+    });
+
+    row.querySelector('button')?.addEventListener('click', () => {
+      const willOpen = !row.classList.contains('open');
+      for (const other of rows) {
+        if (other !== row && other.classList.contains('open')) setOpen(other, false);
+      }
+      setOpen(row, willOpen);
+    });
+  }
+</script>

@@ -1,85 +1,217 @@
 ---
-import ThemeToggle from './ThemeToggle';
-
-const navItems = [
-  { href: "#about", text: "Acerca de mí" },
-  { href: "#projects", text: "Proyectos" },
-  { href: "#experience", text: "Experiencia" },
-  { href: "#skills", text: "Habilidades" },
-  { href: "#contact", text: "Contacto" },
+const nav = [
+  { href: '#inicio', num: '01', text: 'Inicio' },
+  { href: '#proyectos', num: '02', text: 'Proyectos' },
+  { href: '#experiencia', num: '03', text: 'Experiencia' },
+  { href: '#stack', num: '04', text: 'Stack' },
+  { href: '#contacto', num: '05', text: 'Contacto' },
 ];
 ---
 
-<header class="fixed w-full top-0 z-50 bg-white/80 dark:bg-dark-card/80 backdrop-blur-sm shadow-sm transition-colors duration-300">
-  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between h-16">
-      <div class="flex items-center cursor-pointer">
-        <a href="/" class="text-xl font-bold text-primary dark:text-primary">Felipe Muñoz Velasquez
+<header id="site-header">
+  <div class="inner shell">
+    <a href="#inicio" class="mark" aria-label="Felipe Muñoz, inicio">
+      <b class="who dsp">Felipe Muñoz</b>
+    </a>
+
+    <nav class="links mono" aria-label="Secciones">
+      {nav.map((item) => (
+        <a href={item.href} data-navlink>
+          <i aria-hidden="true">{item.num}</i>{item.text}
+          <span class="line" aria-hidden="true"></span>
         </a>
-      </div>
-      <div class="hidden md:flex items-center space-x-8">
-        {navItems.map(item => (
-          <a href={item.href} class="text-gray-700 dark:text-dark-text hover:text-primary dark:hover:text-primary transition-colors">
-            {item.text}
-          </a>
-        ))}
-        <ThemeToggle client:load />
-      </div>
-      <!-- Botón del menú hamburguesa - visible solo en móvil -->
-      <div class="md:hidden flex items-center">
-        <button id="menu-toggle" class="text-gray-700 dark:text-dark-text hover:text-primary dark:hover:text-primary focus:outline-none">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-      </div>
+      ))}
+    </nav>
+
+    <div class="right">
+      <button id="theme-toggle" class="toggle" type="button" aria-label="Cambiar tema">
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+          <mask id="moon-bite">
+            <rect x="0" y="0" width="24" height="24" fill="#fff" />
+            <circle class="bite" cx="12" cy="12" r="6.4" fill="#000" />
+          </mask>
+          <g class="rays" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+            <path d="M12 1.5v2.2M12 20.3v2.2M1.5 12h2.2M20.3 12h2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M19.4 4.6l-1.6 1.6M6.2 17.8l-1.6 1.6" />
+          </g>
+          <circle class="orb" cx="12" cy="12" r="5.6" fill="currentColor" mask="url(#moon-bite)" />
+        </svg>
+      </button>
+
+      <a href="#contacto" class="talk mono">Hablemos</a>
     </div>
-    
-    <!-- Menú móvil -->
-    <div id="mobile-menu" class="md:hidden hidden opacity-0 transform -translate-y-2 absolute w-full left-0 bg-transparent transition-all duration-300 ease-in-out">
-      <div class="px-2 pt-2 pb-3 space-y-1 flex flex-col bg-white dark:bg-dark-card rounded-md shadow-lg mt-2 mx-4 sm:mx-6 lg:mx-8 transition-all duration-300">
-        {navItems.map(item => (
-          <a href={item.href} class="block px-3 py-2 text-gray-700 dark:text-dark-text hover:text-primary dark:hover:text-primary hover:bg-gray-50 dark:hover:bg-dark-hover rounded-md transition-colors">
-            {item.text}
-          </a>
-        ))}
-        <div class="px-3 py-2">
-          <ThemeToggle client:load />
-        </div>
-      </div>
-    </div>
-  </nav>
+  </div>
 </header>
 
+<!-- Móvil: una sola barra, cada sección a un toque. -->
+<nav class="dock" aria-label="Secciones">
+  <a href="#inicio" data-navlink>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1Z" /></svg>
+    <span>Inicio</span>
+  </a>
+  <a href="#proyectos" data-navlink>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM4 10h16M9 10v9" /></svg>
+    <span>Proyectos</span>
+  </a>
+  <a href="#experiencia" data-navlink>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16v13H4zM9 7V4h6v3M4 12h16" /></svg>
+    <span>Ruta</span>
+  </a>
+  <a href="#stack" data-navlink>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5ZM3 13l9 5 9-5" /></svg>
+    <span>Stack</span>
+  </a>
+  <a href="#contacto" data-navlink>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v12H3zM3 6l9 7 9-7" /></svg>
+    <span>Contacto</span>
+  </a>
+</nav>
+
+<style>
+  header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 50;
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--t-btn) var(--ease-std), background-color var(--t-btn) var(--ease-std);
+  }
+  header.stuck {
+    border-bottom-color: var(--hair);
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    backdrop-filter: blur(12px);
+  }
+
+  .inner {
+    height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .mark {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    color: var(--fg);
+    flex: 0 0 auto;
+  }
+  .mark:hover { color: var(--fg); }
+  .who { font-size: 19px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; }
+
+  .links { display: none; align-items: center; gap: 28px; }
+  .links a {
+    position: relative;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-bottom: 5px;
+    transition: color var(--t-hover) var(--ease-std);
+  }
+  .links a i { font-style: normal; font-size: 9px; color: var(--faint); }
+  .links a:hover,
+  .links a.on { color: var(--fg); }
+  .links a.on i { color: var(--lit); }
+  .links .line {
+    position: absolute;
+    left: 0; bottom: 0;
+    height: 1px;
+    width: 100%;
+    background: var(--lit);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform var(--t-btn) var(--ease-std);
+  }
+  .links a:hover .line { transform: scaleX(1); transform-origin: left; }
+  .links a.on .line { transform: scaleX(1); transform-origin: left; }
+
+  .right { display: flex; align-items: center; gap: 12px; flex: 0 0 auto; }
+
+  .toggle {
+    width: 44px; height: 44px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+    background: transparent;
+    cursor: pointer;
+    transition: color var(--t-btn) var(--ease-std), border-color var(--t-btn) var(--ease-std);
+  }
+  .toggle:hover { color: var(--lit); border-color: var(--cy); }
+  .toggle svg { overflow: visible; }
+
+  /* Sol → luna: los rayos se repliegan y una máscara muerde el círculo. */
+  .bite { transform: translate(13px, -13px); transition: transform var(--t-btn) var(--ease-std); }
+  .rays { transform-origin: 12px 12px; transition: opacity var(--t-btn) var(--ease-std), transform var(--t-btn) var(--ease-spring); }
+  .orb { transform-origin: 12px 12px; transition: transform var(--t-btn) var(--ease-spring); }
+  :global(.dark) .bite { transform: translate(5px, -5px); }
+  :global(.dark) .rays { opacity: 0; transform: scale(0.4) rotate(-45deg); }
+  :global(.dark) .orb { transform: scale(1.14); }
+
+  .talk {
+    display: none;
+    font-size: 11.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 12px 20px;
+    color: var(--fg);
+    transition: border-color var(--t-btn) var(--ease-std), background-color var(--t-btn) var(--ease-std), color var(--t-btn) var(--ease-std);
+  }
+  .talk:hover { border-color: var(--cy); background: var(--cy); color: var(--on-cy); }
+
+  /* ── dock móvil ─────────────────────────────────────────── */
+  .dock {
+    position: fixed;
+    left: 14px; right: 14px; bottom: 14px;
+    z-index: 50;
+    height: 62px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--card) 90%, transparent);
+    border: 1px solid var(--hair);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 6px;
+  }
+  .dock a {
+    min-width: 56px;
+    min-height: 48px;
+    display: grid;
+    place-items: center;
+    gap: 3px;
+    border-radius: 14px;
+    color: var(--faint);
+    transition: color var(--t-btn) var(--ease-std), background-color var(--t-btn) var(--ease-std);
+  }
+  .dock a svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .dock a span { font-size: 8.5px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .dock a.on {
+    color: var(--lit);
+    background: color-mix(in srgb, var(--cy) 16%, transparent);
+  }
+
+  @media (min-width: 900px) {
+    .links, .talk { display: flex; }
+    .dock { display: none; }
+  }
+  @media (max-width: 359px) {
+    .dock a span { font-size: 8px; }
+  }
+</style>
+
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const menuToggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    
-    if (menuToggle && mobileMenu) {
-      menuToggle.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-        
-        // Pequeño retraso para permitir que se aplique primero la visibilidad
-        setTimeout(() => {
-          mobileMenu.classList.toggle('opacity-0');
-          mobileMenu.classList.toggle('-translate-y-2');
-        }, 10);
-      });
-      
-      // Cerrar el menú cuando se hace clic en un enlace
-      const menuLinks = mobileMenu.querySelectorAll('a');
-      menuLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          mobileMenu.classList.add('opacity-0');
-          mobileMenu.classList.add('-translate-y-2');
-          
-          // Pequeño retraso antes de ocultar completamente
-          setTimeout(() => {
-            mobileMenu.classList.add('hidden');
-          }, 300);
-        });
-      });
-    }
+  const btn = document.getElementById('theme-toggle');
+  btn?.addEventListener('click', () => {
+    const dark = document.documentElement.classList.toggle('dark');
+    document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+    localStorage.setItem('theme', dark ? 'dark' : 'light');
   });
 </script>

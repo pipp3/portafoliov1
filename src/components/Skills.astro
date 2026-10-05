@@ -1,104 +1,317 @@
 ---
-import { m } from "framer-motion";
-const skills = {
-  "Lenguajes de programación": [
-    { name: "JavaScript", icon: "/svg/javascript.svg" },
-    { name: "TypeScript", icon: "/svg/typescript.svg" },
-    { name: "Python", icon: "/svg/python.svg" },
-    { name: "Go", icon: "/svg/go.svg" },
-  ],
-  "Frontend": [
-    { name: "React", icon: "/svg/react.svg" },
-    { name: "Tailwind CSS", icon: "/svg/tailwindcss.svg" },
-    { name: "Bootstrap", icon: "/svg/bootstrap.svg" },
-    { name: "Next.js", icon: "/svg/nextdotjs.svg" },
-    { name: "Astro", icon: "/svg/astro.svg" },
-  
-    
-  ],
-  "Backend": [
-    { name: "Node.js", icon: "/svg/nodedotjs.svg" }, 
-    { name: "Express", icon: "/svg/express.svg" },
-    { name: "Python", icon: "/svg/python.svg" },
-    { name: "Gin", icon: "/svg/gin.svg" }
-  ],
-  "Base de datos": [
-    { name: "PostgreSQL", icon: "/svg/postgresql.svg" },
-    { name: "MySQL", icon: "/svg/mysql.svg" },
-    { name: "MongoDB", icon: "/svg/mongodb.svg" }
-  ],
-  "Herramientas": [
-    { name: "Git", icon: "/svg/git.svg" },
-    { name: "GitHub", icon: "/svg/github-2.svg" },
-    { name: "Docker", icon: "/svg/docker.svg" },
-    
-  ],
-  "Habilidades blandas": [
-    { name: "Resolucion de problemas", icon: "" },
-    { name: "Trabajo en equipo", icon: "" },
-    { name: "Comunicacion", icon: "" },
-    { name: "Adaptacion al cambio", icon: "" },
-    { name: "Proactividad", icon: "" },
-    {name: "Priorizacion de tareas", icon: ""},
+// Los íconos llevan el color oficial de su marca (Simple Icons). Los que son
+// casi negros se invierten en tema oscuro para no perderse en el fondo.
+const darkBrand = new Set(['express', 'nextdotjs', 'amazonwebservices']);
 
-  ]
-};
+const serverTape = [
+  { name: 'Node.js', icon: 'nodedotjs' },
+  { name: 'Go', icon: 'go' },
+  { name: 'Python', icon: 'python' },
+  { name: 'TypeScript', icon: 'typescript' },
+  { name: 'PostgreSQL', icon: 'postgresql' },
+  { name: 'Docker', icon: 'docker' },
+  { name: 'Express', icon: 'express' },
+  { name: 'MongoDB', icon: 'mongodb' },
+];
+
+const clientTape = [
+  { name: 'React', icon: 'react' },
+  { name: 'Next.js', icon: 'nextdotjs' },
+  { name: 'Astro', icon: 'astro' },
+  { name: 'Tailwind', icon: 'tailwindcss' },
+  { name: 'JavaScript', icon: 'javascript' },
+  { name: 'MySQL', icon: 'mysql' },
+  { name: 'Git', icon: 'git' },
+  { name: 'Bootstrap', icon: 'bootstrap' },
+];
+
+const columns = [
+  {
+    title: 'Backend',
+    sub: 'Donde paso la mayor parte del tiempo',
+    items: [
+      { name: 'Node.js · Express', icon: 'nodedotjs', level: 3 },
+      { name: 'Python', icon: 'python', level: 3 },
+      { name: 'FastAPI', icon: 'fastapi', level: 2 },
+      { name: 'Go · Gin', icon: 'go', level: 2 },
+      { name: 'C#', icon: 'csharp', level: 1 },
+    ],
+  },
+  {
+    title: 'Frontend',
+    sub: 'Interfaces que no estorban',
+    items: [
+      { name: 'React · TypeScript', icon: 'react', level: 3 },
+      { name: 'Next.js · SSR', icon: 'nextdotjs', level: 3 },
+      { name: 'Astro', icon: 'astro', level: 3 },
+      { name: 'Tailwind CSS', icon: 'tailwindcss', level: 3 },
+    ],
+  },
+  {
+    title: 'Datos',
+    sub: 'Modelar antes de escribir',
+    items: [
+      { name: 'PostgreSQL', icon: 'postgresql', level: 3 },
+      { name: 'MySQL', icon: 'mysql', level: 3 },
+      { name: 'MongoDB', icon: 'mongodb', level: 2 },
+    ],
+  },
+  {
+    title: 'Cloud · DevOps',
+    sub: 'Hacia donde estoy creciendo',
+    items: [
+      { name: 'AWS · EC2 · S3', icon: 'amazonwebservices', level: 2 },
+      { name: 'GitHub Actions', icon: 'githubactions', level: 2 },
+      { name: 'GCP · BigQuery', icon: 'googlecloud', level: 2 },
+      { name: 'Jenkins', icon: 'jenkins', level: 1 },
+    ],
+  },
+];
+
+const tools = [
+  { name: 'Git · GitHub', icon: 'git' },
+  { name: 'Docker', icon: 'docker' },
+  { name: 'Linux', icon: 'linux' },
+  { name: 'Bash · Terminal', icon: 'gnubash' },
+  { name: 'Postman', icon: 'postman' },
+  { name: 'VS Code', icon: 'visualstudiocode' },
+];
+
+// Reemplaza a la lista de «habilidades blandas»: seis adjetivos no
+// dicen nada, tres frases de método sí.
+const method = [
+  'Primero el modelo de datos y los contratos de la API. El resto se acomoda solo.',
+  'Refactorizo temprano. Un backend que nadie entiende ya está roto, aunque responda 200.',
+  'Mido antes de optimizar, y dejo el proyecto documentado para el que venga después.',
+];
 ---
 
-<section id="skills" class="py-20 bg-gray-50 dark:bg-dark-bg transition-colors duration-300">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-4xl font-bold text-center mb-4 text-primary tracking-tight">Habilidades y Tecnologías</h2>
-    <p class="text-xl text-gray-600 dark:text-dark-text text-center mb-12 leading-relaxed">Mi stack tecnológico y herramientas principales</p>
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-      {Object.entries(skills).map(([category, items], index) => (
-        <div class="skill-card bg-white dark:bg-dark-card p-6 rounded-lg shadow-lg cursor-pointer opacity-0 translate-y-4 transition-all duration-500 hover:scale-105" data-index={index}>
-          <h3 class="text-xl font-semibold mb-4 text-textH2 dark:text-primary tracking-tight">{category}</h3>
-          <ul class="space-y-3">
-            {items.map((skill, skillIndex) => (
-              <li class="skill-item flex items-center opacity-0 -translate-x-4 transition-all duration-300" data-index={skillIndex}>
-                {skill.icon ? (
-                  <img src={skill.icon} alt={skill.name} class="w-6 h-6 mr-3 dark:invert dark:brightness-200" />
-                ) : (
-                  <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                )}
-                <span class="text-textSpan dark:text-gray-200 leading-relaxed">{skill.name}</span>
+<section id="stack" class="skills">
+  <div class="shell">
+    <div class="head">
+      <div>
+        <p class="kicker"><b class="mono">04 — Stack</b><span class="rule"></span></p>
+        <h2 class="mask-line"><span>Con qué construyo</span></h2>
+      </div>
+      <p class="meta mono" data-reveal>
+        <span>Backend primero</span>
+        <span>Frontend cuando toca</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="band marquee" aria-hidden="true">
+    <div class="marquee-track">
+      {[...serverTape, ...serverTape].map((t) => (
+        <span class="cell">
+          <img src={`/svg/${t.icon}.svg`} class:list={[{ mono: darkBrand.has(t.icon) }]} alt="" width="23" height="23" loading="lazy" />
+          <span class="mono">{t.name}</span>
+        </span>
+      ))}
+    </div>
+  </div>
+
+  <div class="band marquee" aria-hidden="true">
+    <div class="marquee-track rtl">
+      {[...clientTape, ...clientTape].map((t) => (
+        <span class="cell">
+          <img src={`/svg/${t.icon}.svg`} class:list={[{ mono: darkBrand.has(t.icon) }]} alt="" width="23" height="23" loading="lazy" />
+          <span class="mono">{t.name}</span>
+        </span>
+      ))}
+    </div>
+  </div>
+
+  <div class="shell">
+    <div class="cols" data-stagger="tight">
+      {columns.map((col) => (
+        <div class="col" data-reveal>
+          <h3 class="mono">{col.title}</h3>
+          <p class="sub">{col.sub}</p>
+          <ul>
+            {col.items.map((item) => (
+              <li>
+                <span class="ic"><img src={`/svg/${item.icon}.svg`} class:list={[{ mono: darkBrand.has(item.icon) }]} alt="" width="15" height="15" loading="lazy" /></span>
+                <span class="nm">{item.name}</span>
+                <span class="lv" aria-label={`Nivel ${item.level} de 4`}>
+                  {[1, 2, 3, 4].map((n) => <i class:list={[{ on: n <= item.level }]}></i>)}
+                </span>
               </li>
             ))}
           </ul>
         </div>
       ))}
     </div>
+
+    <div class="tools" data-reveal>
+      <h3 class="mono">Herramientas</h3>
+      <p class="sub">Lo que uso todos los días</p>
+      <ul>
+        {tools.map((t) => (
+          <li>
+            <span class="ic"><img src={`/svg/${t.icon}.svg`} class:list={[{ mono: darkBrand.has(t.icon) }]} alt="" width="15" height="15" loading="lazy" /></span>
+            <span class="nm">{t.name}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="method" data-stagger="tight">
+      {method.map((text, i) => (
+        <div data-reveal>
+          <b class="mono">Cómo trabajo · 0{i + 1}</b>
+          <p>{text}</p>
+        </div>
+      ))}
+    </div>
   </div>
 </section>
 
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const card = entry.target as HTMLElement;
-        const cardIndex = parseInt(card.dataset.index || '0');
-        
-        // Animar la tarjeta
-        setTimeout(() => {
-          card.classList.remove('opacity-0', 'translate-y-4');
-        }, cardIndex * 100);
+<style>
+  .skills { position: relative; padding: clamp(80px, 11vw, 132px) 0; background: var(--bg); }
 
-        // Animar los items dentro de la tarjeta
-        const items = card.querySelectorAll('.skill-item');
-        items.forEach((item, itemIndex) => {
-          setTimeout(() => {
-            item.classList.remove('opacity-0', '-translate-x-4');
-          }, cardIndex * 100 + itemIndex * 50);
-        });
-      }
-    });
-  }, {
-    threshold: 0.1
-  });
+  .head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: clamp(30px, 4vw, 46px);
+  }
+  h2 { font-size: clamp(38px, 6.2vw, 72px); }
+  .meta {
+    text-align: right;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--faint);
+    line-height: 2;
+    margin: 0;
+    flex: 0 0 auto;
+  }
+  .meta span { display: block; }
 
-  document.querySelectorAll('.skill-card').forEach(card => {
-    observer.observe(card);
-  });
-</script>
+  .band { border-top: 1px solid var(--hair); padding: 24px 0; }
+  .band + .band { border-bottom: 1px solid var(--hair); }
+
+  .cell {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 0 clamp(20px, 3vw, 34px);
+    border-right: 1px solid var(--hair);
+  }
+  .cell img { width: 23px; height: 23px; }
+  :global(.dark) img.mono { filter: invert(1); }
+  .cell span {
+    font-size: 12.5px;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--faint);
+    white-space: nowrap;
+  }
+
+  /* ── columnas ───────────────────────────────────────────── */
+  .cols {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin-top: clamp(40px, 5vw, 56px);
+  }
+  .col { padding: 28px 0; border-top: 1px solid var(--hair); }
+  .col:first-child { border-top: 0; padding-top: 0; }
+  .col h3, .tools h3 {
+    margin: 0 0 6px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--lit);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .col .sub, .tools .sub { font-size: 13px; color: var(--faint); margin: 0 0 22px; }
+
+  .col ul { list-style: none; margin: 0; padding: 0; }
+  .col li, .tools li {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--hair);
+  }
+  .col li::after, .tools li::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -1px;
+    height: 1px;
+    width: 100%;
+    background: var(--lit);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--t-btn) var(--ease-std);
+  }
+  .col li:hover::after, .tools li:hover::after { transform: scaleX(1); }
+
+  .ic {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--fg) 5%, transparent);
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+  }
+  .ic img { width: 15px; height: 15px; }
+  .nm { font-size: 15.5px; font-weight: 500; letter-spacing: -0.012em; }
+  .lv { margin-left: auto; display: flex; gap: 3px; flex: 0 0 auto; }
+  .lv i { width: 16px; height: 3px; border-radius: 2px; background: var(--hair); }
+  .lv i.on { background: var(--cy); }
+
+  /* ── herramientas ───────────────────────────────────────── */
+  .tools {
+    margin-top: clamp(44px, 5vw, 60px);
+    padding-top: clamp(32px, 4vw, 44px);
+    border-top: 1px solid var(--hair);
+  }
+  .tools ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 28px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* ── método ─────────────────────────────────────────────── */
+  .method {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    margin-top: clamp(44px, 5vw, 60px);
+    padding-top: clamp(32px, 4vw, 44px);
+    border-top: 1px solid var(--hair);
+  }
+  .method b {
+    display: block;
+    font-size: 10.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-bottom: 9px;
+    font-weight: 500;
+  }
+  .method p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted); text-wrap: pretty; }
+
+  @media (min-width: 860px) {
+    .cols { grid-template-columns: repeat(2, 1fr); row-gap: 44px; }
+    .col { padding: 0 40px; border-top: 0; border-left: 1px solid var(--hair); }
+    .col:nth-child(odd) { padding-left: 0; border-left: 0; }
+    .method { grid-template-columns: repeat(3, 1fr); gap: 40px; }
+    .tools ul { grid-template-columns: repeat(3, 1fr); column-gap: 40px; }
+  }
+  @media (min-width: 1440px) {
+    .cols { grid-template-columns: repeat(4, 1fr); }
+    .col, .col:nth-child(odd) { padding: 0 32px; border-left: 1px solid var(--hair); }
+    .col:first-child { padding-left: 0; border-left: 0; }
+  }
+</style>

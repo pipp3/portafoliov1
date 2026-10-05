@@ -1,106 +1,280 @@
 ---
-interface Experience {
+interface Role {
   company: string;
   position: string;
   period: string;
+  year: string;
+  location?: string;
   description: string;
   technologies: string[];
-  location: string;
+  impact?: { n: string; label: string };
+  current?: boolean;
 }
 
-const experiences: Experience[] = [
+const roles: Role[] = [
   {
-    company: "Dinámica Plataforma",
-    position: "Desarrollador Full-Stack",
-    period: "Mayo 2026 - Presente",
-    description: "Actualmente trabajando en Dinámica Plataforma.",
-    technologies: [],
-    location: "Santiago, Chile"
+    company: 'Dinámica Plataforma',
+    position: 'Desarrollador Full-Stack',
+    period: 'Mayo 2026 — presente',
+    year: '2026',
+    location: 'Santiago, CL',
+    description:
+      'Desarrollo y mantengo plataformas web a medida para clientes, de punta a punta: levanto requerimientos, construyo con Next.js, despliego y doy soporte continuo. En paralelo integro IA en mi flujo de trabajo y <b>automaticé tareas y pipelines internos de la empresa</b>, lo que me permite iterar más rápido y entregar con más consistencia.',
+    technologies: ['Next.js', 'React', 'IA aplicada', 'Automatización'],
+    current: true,
   },
   {
-    company: "Think Mining+",
-    position: "Desarrollador Full-Stack",
-    period: "Enero 2026 - Febrero 2026",
-    description: "Refactoricé un backend desarrollado en Python, reestructurando la organización de carpetas y scripts para mejorar la mantenibilidad y escalabilidad del proyecto. Optimicé una plataforma de monitoreo desarrollada en Next.js mediante la aplicación de buenas prácticas y SSR. Desarrollé un nuevo módulo de reportería y mejoré el módulo de edición de mapas utilizando Mapbox, incrementando la usabilidad y eficiencia de la herramienta.",
-    technologies: ["Python", "Next.js", "Mapbox", "SSR", "TypeScript"],
-    location: "Santiago, Chile"
+    company: 'Think Mining+',
+    position: 'Desarrollador Full-Stack',
+    period: 'Ene — Feb 2026',
+    year: '2026',
+    description:
+      'Refactoricé un backend Python completo: reorganicé carpetas y scripts para que el proyecto se pudiera mantener y crecer. Optimicé una plataforma de monitoreo en Next.js aplicando SSR, y construí el módulo de reportería junto a la <b>edición de mapas con Mapbox</b>.',
+    technologies: ['Python', 'Next.js', 'Mapbox', 'SSR', 'TypeScript'],
+    impact: { n: 'SSR', label: 'Render en servidor para el monitoreo' },
   },
   {
-    company: "Reneé",
-    position: "Desarrollador Full-Stack",
-    period: "Junio 2025 - Noviembre 2025",
-    description: "Lideré el desarrollo de una plataforma psicométrica que digitalizó el proceso de reclutamiento, reduciendo un 60% el tiempo de evaluación manual. Desarrollé la API REST en Express con base de datos MySQL y el frontend en React + TypeScript.",
-    technologies: ["React", "TypeScript", "Express", "MySQL", "API REST", "Node.js"],
-    location: "Santiago, Chile"
+    company: 'Reneé',
+    position: 'Desarrollador Full-Stack',
+    period: 'Jun — Nov 2025',
+    year: '2025',
+    description:
+      'Lideré el desarrollo de una plataforma psicométrica que digitalizó el proceso de reclutamiento. API REST en Express sobre MySQL, frontend en React + TypeScript. <b>El tiempo de evaluación manual bajó un 60%.</b>',
+    technologies: ['React', 'TypeScript', 'Express', 'MySQL', 'Node.js'],
+    impact: { n: '−60%', label: 'Tiempo de evaluación manual' },
   },
   {
-    company: "Precision",
-    position: "Desarrollador Full-Stack",
-    period: "Diciembre 2023 - Febrero 2024",
-    description: "Diseñé e implementé un sistema automatizado de cotizaciones integrado con HubSpot CRM, transformando un proceso manual en uno completamente digital y reduciendo el tiempo de procesamiento en un 75%. Desarrollé el backend con Google Apps Script, integrando BigQuery y una API REST conectada a SQL Server. Construí el frontend con HTML5, CSS3, jQuery y Bootstrap.",
-    technologies: ["JavaScript", "Google Apps Script", "Bootstrap", "jQuery", "API REST", "HTML5", "CSS3", "BigQuery", "SQL Server"],
-    location: "Santiago, Chile"
+    company: 'Precision',
+    position: 'Desarrollador Full-Stack',
+    period: 'Dic 2023 — Feb 2024',
+    year: '2023',
+    description:
+      'Diseñé e implementé un sistema automatizado de cotizaciones integrado con HubSpot CRM: de un proceso manual a uno digital de punta a punta. Backend en Google Apps Script con BigQuery y una API REST contra SQL Server. <b>El procesamiento cayó un 75%.</b>',
+    technologies: ['Apps Script', 'BigQuery', 'SQL Server', 'HubSpot', 'jQuery'],
+    impact: { n: '−75%', label: 'Tiempo de procesamiento' },
   },
 ];
 ---
 
-<section id="experience" class="py-20 bg-gray-50 dark:bg-dark-bg transition-colors duration-300">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-4xl font-bold text-center mb-4 text-primary tracking-tight">Experiencia Laboral</h2>
-    <p class="text-xl text-gray-600 dark:text-dark-text text-center mb-12 leading-relaxed">Mi trayectoria profesional y roles desempeñados</p>
-    
-    <div class="space-y-8">
-      {experiences.map((exp, index) => (
-        <div class="relative">
-          {/* Línea vertical */}
-          <div class="absolute left-4 md:left-1/2 h-full w-0.5 bg-primary/20"></div>
-          
-          {/* Contenido de la experiencia */}
-          <div class={`relative flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-8 ${
-            index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-          }`}>
-            {/* Círculo decorativo */}
-            <div class="absolute left-0 md:left-1/2 w-8 h-8 bg-primary rounded-full -translate-x-1/2 border-4 border-white dark:border-dark-card shadow-lg"></div>
-            
-            {/* Contenido principal */}
-            <div class={`w-full md:w-1/2 p-6 bg-white dark:bg-dark-card rounded-lg shadow-lg transition-colors duration-300 ${
-              index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'
-            }`}>
-              <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 mb-4">
-                <h3 class="text-xl font-semibold text-primary tracking-tight">{exp.position}</h3>
-                <span class="text-sm text-gray-500 dark:text-dark-muted">{exp.period}</span>
-              </div>
-              
-              <h4 class="text-lg font-medium text-textH2 dark:text-primary mb-2">{exp.company}</h4>
-              <p class="text-gray-600 dark:text-dark-text mb-4 leading-relaxed">{exp.description}</p>
-              
-              <div class="flex flex-wrap gap-2 mb-4">
-                {exp.technologies.map((tech) => (
-                  <span class="bg-gray-100 dark:bg-dark-bg text-gray-800 dark:text-dark-text text-sm px-3 py-1 rounded-full">
-                    {tech}
-                  </span>
-                ))}
-              </div>
-              
-              <div class="flex items-center text-gray-500 dark:text-dark-muted text-sm">
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                </svg>
-                {exp.location}
-              </div>
+<section id="experiencia" class="experience">
+  <div class="shell">
+    <div class="head">
+      <div>
+        <p class="kicker"><b class="mono">03 — Experiencia</b><span class="rule"></span></p>
+        <h2 class="mask-line"><span>Trayectoria</span></h2>
+      </div>
+      <p class="meta mono" data-reveal>
+        <span>Dic 2023 <em class="lit">→</em> hoy</span>
+        <span>{roles.length} equipos · Santiago, CL</span>
+      </p>
+    </div>
+
+    <div class="track">
+      <span class="rail" data-draw aria-hidden="true"><span class="fill"></span></span>
+
+      <ol class="items">
+      {roles.map((role, i) => (
+        <li class="item" data-reveal="blur" style={`--rev-d:${140 + i * 110}ms`}>
+          <span class="year mono" aria-hidden="true">{role.year}</span>
+          <span class="node" aria-hidden="true"></span>
+
+          <div class="body">
+            <div class="top">
+              <h3 class="dsp">{role.company}</h3>
+              {role.current && <span class="now mono">Actual</span>}
             </div>
+
+            <p class="role mono">
+              <span>{role.position}</span>
+              <i aria-hidden="true"></i>
+              <span>{role.period}</span>
+              {role.location && (<><i aria-hidden="true"></i><span>{role.location}</span></>)}
+            </p>
+
+            <p class="desc" set:html={role.description} />
+
+            {role.technologies.length > 0 && (
+              <ul class="chips" aria-label="Tecnologías">
+                {role.technologies.map((t) => <li class="chip"><span>{t}</span></li>)}
+              </ul>
+            )}
           </div>
-        </div>
+
+          {role.impact && (
+            <div class="impact">
+              <b class="dsp">{role.impact.n}</b>
+              <span class="mono">{role.impact.label}</span>
+            </div>
+          )}
+        </li>
       ))}
+      </ol>
     </div>
   </div>
 </section>
 
 <style>
-  @media (max-width: 768px) {
-    .timeline::before {
-      left: 1rem;
-    }
+  .experience { position: relative; padding: clamp(80px, 11vw, 132px) 0; background: var(--bg-2); }
+
+  .head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: clamp(36px, 5vw, 58px);
   }
-</style> 
+  h2 { font-size: clamp(40px, 6.4vw, 72px); }
+  .meta {
+    text-align: right;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--faint);
+    line-height: 2;
+    margin: 0;
+    flex: 0 0 auto;
+  }
+  .meta span { display: block; }
+  .meta em { font-style: normal; }
+  .lit { color: var(--lit); }
+
+  /* Un solo riel continuo, no un segmento por tarjeta. */
+  .track { position: relative; padding-left: 34px; }
+  .items { list-style: none; margin: 0; padding: 0; }
+  .rail {
+    display: block;
+    position: absolute;
+    left: 6px; top: 12px; bottom: 30px;
+    width: 1px;
+    background: var(--hair);
+  }
+  .fill {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, var(--lit), var(--cy) 45%, var(--deep));
+    box-shadow: 0 0 10px color-mix(in srgb, var(--lit) 55%, transparent);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 1600ms var(--ease-expo) 200ms;
+  }
+  .rail.is-in .fill { transform: scaleY(1); }
+
+  /* Donde el navegador lo soporta, el riel se dibuja con el scroll. */
+  @supports (animation-timeline: view()) {
+    .fill {
+      transition: none;
+      animation: rail-draw linear both;
+      animation-timeline: view();
+      animation-range: cover 8% cover 72%;
+    }
+    @keyframes rail-draw { to { transform: scaleY(1); } }
+  }
+
+  .item { position: relative; padding: 0 0 clamp(36px, 5vw, 50px); }
+
+  .node {
+    position: absolute;
+    left: -34px; top: 10px;
+    width: 13px; height: 13px;
+    border-radius: 50%;
+    background: var(--border);
+    border: 1px solid var(--border);
+    transition: background-color var(--t-row) var(--ease-std), border-color var(--t-row) var(--ease-std);
+  }
+  .item.is-in .node { background: var(--lit); border-color: var(--lit); }
+  .node::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 1px solid var(--lit);
+    opacity: 0;
+  }
+  .item.is-in .node::after { animation: node-ping 900ms var(--ease-expo) 200ms 1; }
+  @keyframes node-ping {
+    0% { transform: scale(0.5); opacity: 1; }
+    100% { transform: scale(2.6); opacity: 0; }
+  }
+
+  .year { display: none; }
+
+  .top { display: flex; align-items: baseline; flex-wrap: wrap; gap: 14px; margin-bottom: 6px; }
+  h3 { font-size: clamp(26px, 3.8vw, 38px); font-weight: 700; letter-spacing: -0.035em; line-height: 1.1; }
+  .now {
+    font-size: 9.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--solid-fg);
+    background: var(--solid-bg);
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-weight: 600;
+    animation: now-glow 2.6s ease-in-out infinite;
+  }
+  @keyframes now-glow {
+    0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--solid-bg) 45%, transparent); }
+    50% { box-shadow: 0 0 0 7px transparent; }
+  }
+
+  .role {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 0 0 14px;
+    font-size: 11.5px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+  .role i { width: 3px; height: 3px; border-radius: 50%; background: currentColor; }
+
+  .desc {
+    margin: 0 0 16px;
+    font-size: 15.5px;
+    line-height: 1.66;
+    color: var(--muted);
+    max-width: 68ch;
+    text-wrap: pretty;
+  }
+  .desc :global(b) { color: var(--fg); font-weight: 600; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 7px; list-style: none; margin: 0; padding: 0; }
+
+  .impact { margin-top: 20px; border-left: 1px solid var(--hair); padding-left: 20px; }
+  .impact b {
+    display: block;
+    font-size: clamp(32px, 4vw, 46px);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--lit);
+  }
+  .impact span {
+    display: block;
+    margin-top: 8px;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--faint);
+    line-height: 1.8;
+  }
+
+  @media (min-width: 1000px) {
+    .track { padding-left: 126px; }
+    .rail { left: 78px; }
+    .node { left: -54px; }
+    .year {
+      display: block;
+      position: absolute;
+      left: -126px; top: 6px;
+      width: 62px;
+      text-align: right;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: var(--faint);
+    }
+    .item { display: grid; grid-template-columns: 1fr 214px; gap: 44px; align-items: start; }
+    .impact { margin-top: 4px; padding-left: 24px; }
+  }
+</style>

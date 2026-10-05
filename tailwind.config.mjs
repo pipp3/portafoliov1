@@ -7,6 +7,9 @@ export default {
       colors: {
         primary: '#0891b2',
         secondary: '#164e63',
+        // Mismo cian, un paso más claro: #0891b2 sobre blanco da 3.7:1
+        // y no alcanza AA en texto pequeño.
+        lit: '#22d3ee',
         textH2: '#3b82f6',
         textSpan: '#0284c7',
         dark: {
@@ -18,8 +21,9 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['Poppins', 'sans-serif'],
+        sans: ['Instrument Sans', 'system-ui', 'sans-serif'],
+        display: ['Bricolage Grotesque', 'Instrument Sans', 'sans-serif'],
+        mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
       },
     },
   },
